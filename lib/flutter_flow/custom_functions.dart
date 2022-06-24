@@ -47,3 +47,18 @@ String editQuizAnswer(
   quizAnswer = answerList[questionNumber];
   return quizAnswer;
 }
+
+String returnQuizAnswer(
+  QuizzesRecord recQuiz,
+  int answerNumber,
+  int questionNumber,
+) {
+  // Add your function code here!
+  String answerString;
+
+  if (questionNumber == 1) {
+    answerString = recQuiz.q1Answers[questionNumber];
+  }
+
+  return answerString;
+}

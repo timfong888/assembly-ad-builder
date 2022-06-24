@@ -1,6 +1,5 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/ad_vertical_nav_widget.dart';
 import '../create_quiz_q2/create_quiz_q2_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -44,16 +43,14 @@ class _EditQuizWidgetState extends State<EditQuizWidget> {
   void initState() {
     super.initState();
     q1Answer1Controller = TextEditingController(
-        text: functions.editQuizAnswer(
-            1, widget.recQuiz.q1Answers.toList().toList(), widget.recQuiz));
+        text: functions.returnQuizAnswer(widget.recQuiz, 0, 1));
     q1CorrectAnswerController =
         TextEditingController(text: widget.recQuiz.q1Correct);
     question1Controller = TextEditingController(text: widget.recQuiz.question1);
     q1Answer2Controller = TextEditingController();
     q1Answer3Controller = TextEditingController();
     q1Answer4Controller = TextEditingController(
-        text: functions.editQuizAnswer(
-            4, widget.recQuiz.q1Answers.toList().toList(), widget.recQuiz));
+        text: functions.returnQuizAnswer(widget.recQuiz, 3, 1));
   }
 
   @override
@@ -97,7 +94,6 @@ class _EditQuizWidgetState extends State<EditQuizWidget> {
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
-              AdVerticalNavWidget(),
               Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [

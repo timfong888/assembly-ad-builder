@@ -382,36 +382,66 @@ class _ListIssuesWidgetState extends State<ListIssuesWidget> {
                                                       ],
                                                     ),
                                                   ),
-                                                  Stack(
-                                                    children: [
-                                                      FlutterFlowIconButton(
-                                                        borderColor:
-                                                            Colors.transparent,
-                                                        borderRadius: 30,
-                                                        borderWidth: 1,
-                                                        buttonSize: 60,
-                                                        icon: FaIcon(
-                                                          FontAwesomeIcons
-                                                              .solidEdit,
-                                                          color: Colors.black,
-                                                          size: 30,
-                                                        ),
-                                                        onPressed: () async {
-                                                          await Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  EditIssueWidget(
-                                                                recIssue:
-                                                                    listViewIssuesRecord,
-                                                                recCatalog: widget
-                                                                    .recCatalog,
+                                                  Container(
+                                                    height: 60,
+                                                    child: Stack(
+                                                      alignment:
+                                                          AlignmentDirectional(
+                                                              0.050000000000000044,
+                                                              0),
+                                                      children: [
+                                                        FlutterFlowIconButton(
+                                                          borderColor: Colors
+                                                              .transparent,
+                                                          borderRadius: 30,
+                                                          borderWidth: 1,
+                                                          buttonSize: 60,
+                                                          icon: FaIcon(
+                                                            FontAwesomeIcons
+                                                                .solidEdit,
+                                                            color: Colors.black,
+                                                            size: 30,
+                                                          ),
+                                                          onPressed: () async {
+                                                            await Navigator
+                                                                .push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        EditIssueWidget(
+                                                                  recIssue:
+                                                                      listViewIssuesRecord,
+                                                                  recCatalog: widget
+                                                                      .recCatalog,
+                                                                ),
                                                               ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      ),
-                                                    ],
+                                                            );
+                                                          },
+                                                        ),
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  0.9, 0.95),
+                                                          child: Text(
+                                                            'Edit',
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ],
                                               ),

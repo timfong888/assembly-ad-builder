@@ -1,5 +1,6 @@
 import '../backend/backend.dart';
 import '../create_quiz/create_quiz_widget.dart';
+import '../display_full_ad/display_full_ad_widget.dart';
 import '../edit_ad/edit_ad_widget.dart';
 import '../edit_quiz/edit_quiz_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -185,7 +186,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                   ),
                                 ),
                                 Text(
-                                  'Edit Quitz',
+                                  'Edit Quiz',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
@@ -193,6 +194,20 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBtnText,
                                       ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      25, 0, 0, 0),
+                                  child: Text(
+                                    'Show Ad',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBtnText,
+                                        ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -314,11 +329,13 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                     ),
                                   ),
                                   Container(
-                                    width: 100,
+                                    width: 350,
                                     height: 100,
                                     decoration: BoxDecoration(),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         StreamBuilder<AdsRecord>(
                                           stream: AdsRecord.getDocument(
@@ -411,6 +428,61 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                               },
                                             );
                                           },
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  25, 0, 0, 0),
+                                          child: StreamBuilder<QuizzesRecord>(
+                                            stream: QuizzesRecord.getDocument(
+                                                listViewAdsRecord.refQuiz),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 50,
+                                                    height: 50,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      color: Color(0xFFFF9D2E),
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              final showAdQuizzesRecord =
+                                                  snapshot.data;
+                                              return FlutterFlowIconButton(
+                                                borderColor: Colors.transparent,
+                                                borderRadius: 30,
+                                                borderWidth: 1,
+                                                buttonSize: 60,
+                                                icon: Icon(
+                                                  Icons.remove_red_eye,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .tertiaryColor,
+                                                  size: 30,
+                                                ),
+                                                onPressed: () async {
+                                                  await Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DisplayFullAdWidget(
+                                                        recIssue:
+                                                            widget.recIssue,
+                                                        recAd:
+                                                            listViewAdsRecord,
+                                                        recQuiz:
+                                                            showAdQuizzesRecord,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                          ),
                                         ),
                                       ],
                                     ),
