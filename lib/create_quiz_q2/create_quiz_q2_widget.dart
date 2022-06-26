@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +17,15 @@ class CreateQuizQ2Widget extends StatefulWidget {
     this.recordAd,
     this.refIssue,
     this.recIssue,
-    this.recNewQuiz,
+    this.recQuiz,
+    this.recCatalog,
   }) : super(key: key);
 
   final AdsRecord recordAd;
   final DocumentReference refIssue;
   final IssuesRecord recIssue;
-  final QuizzesRecord recNewQuiz;
+  final QuizzesRecord recQuiz;
+  final CatalogRecord recCatalog;
 
   @override
   _CreateQuizQ2WidgetState createState() => _CreateQuizQ2WidgetState();
@@ -56,7 +59,7 @@ class _CreateQuizQ2WidgetState extends State<CreateQuizQ2Widget> {
         backgroundColor: Color(0xFF0081A7),
         automaticallyImplyLeading: false,
         title: Text(
-          'Create Quiz - Question 2',
+          'Create Quiz - Question 2: ${widget.recIssue.ballotID}${widget.recIssue.title}',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: Colors.white,
@@ -89,15 +92,6 @@ class _CreateQuizQ2WidgetState extends State<CreateQuizQ2Widget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    widget.recIssue.title,
-                    style: FlutterFlowTheme.of(context).bodyText1,
-                  ),
-                ],
-              ),
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -171,7 +165,7 @@ class _CreateQuizQ2WidgetState extends State<CreateQuizQ2Widget> {
                     height: 100,
                     decoration: BoxDecoration(),
                     child: Text(
-                      'Question 1',
+                      'Question',
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                   ),
@@ -435,7 +429,10 @@ class _CreateQuizQ2WidgetState extends State<CreateQuizQ2Widget> {
                           ),
                         ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.normal,
+                          ),
                     ),
                   ),
                 ],
@@ -445,18 +442,21 @@ class _CreateQuizQ2WidgetState extends State<CreateQuizQ2Widget> {
                   final quizzesUpdateData = {
                     ...createQuizzesRecordData(
                       q2Correct: q2CorrectAnswerController.text,
-                      question1: '',
+                      question2: question2Controller.text,
                     ),
-                    'q2Answers':
-                        FieldValue.arrayUnion([q2Answer1Controller.text]),
+                    'q2Answers': functions.quizAnswersasStringList(
+                        q2Answer1Controller.text,
+                        q2Answer2Controller.text,
+                        q2Answer3Controller.text,
+                        q2Answer4Controller.text),
                   };
-                  await widget.recNewQuiz.reference.update(quizzesUpdateData);
+                  await widget.recQuiz.reference.update(quizzesUpdateData);
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => CreateAdWidget(
                         recordIssue: widget.recIssue,
-                        recQuiz: widget.recNewQuiz,
+                        recQuiz: widget.recQuiz,
                       ),
                     ),
                   );

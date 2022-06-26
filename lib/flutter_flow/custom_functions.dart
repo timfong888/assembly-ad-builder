@@ -26,7 +26,7 @@ List<String> quizAnswersasStringList(
 ) {
   // Add your function code here!
 
-  List<String> outputQuizAnswersAsStringList;
+  List<String> outputQuizAnswersAsStringList = [];
 
   outputQuizAnswersAsStringList.add(answer1);
   outputQuizAnswersAsStringList.add(answer2);

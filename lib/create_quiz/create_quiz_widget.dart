@@ -8,6 +8,7 @@ import '../list_catalog/list_catalog_widget.dart';
 import '../list_issues/list_issues_widget.dart';
 import '../listof_ads/listof_ads_widget.dart';
 import '../login/login_widget.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -110,7 +111,7 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                           );
                         },
                         child: Text(
-                          '> List Issues',
+                          '> List Issues >',
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'Poppins',
@@ -119,11 +120,29 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                         ),
                       ),
                       Text(
-                        '>     Issue',
+                        '     Issue',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Poppins',
                               color:
                                   FlutterFlowTheme.of(context).primaryBtnText,
+                            ),
+                      ),
+                      Text(
+                        widget.recIssue.ballotID,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color:
+                                  FlutterFlowTheme.of(context).primaryBtnText,
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
+                      Text(
+                        widget.recIssue.title,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color:
+                                  FlutterFlowTheme.of(context).primaryBtnText,
+                              fontWeight: FontWeight.w500,
                             ),
                       ),
                       InkWell(
@@ -138,7 +157,7 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                           );
                         },
                         child: Text(
-                          '>       List of Ads',
+                          '>       List of Ads >',
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
@@ -149,11 +168,28 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                         ),
                       ),
                       Text(
-                        '>   Create Quiz',
+                        '   Create Ad >',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Poppins',
                               color:
                                   FlutterFlowTheme.of(context).primaryBtnText,
+                            ),
+                      ),
+                      Text(
+                        '>   Create Quiz >',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color:
+                                  FlutterFlowTheme.of(context).primaryBtnText,
+                            ),
+                      ),
+                      Text(
+                        '     ....Create Argument',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color: Color(0xFFCBEEF6),
+                              fontWeight: FontWeight.w300,
+                              fontStyle: FontStyle.italic,
                             ),
                       ),
                       Padding(
@@ -187,26 +223,6 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
               Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 25),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          widget.recIssue.ballotID,
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                        ),
-                        Text(
-                          ':  ',
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                        ),
-                        Text(
-                          widget.recIssue.title,
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                        ),
-                      ],
-                    ),
-                  ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
                     child: Row(
@@ -575,7 +591,11 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                               ),
                             ),
                           ),
-                          style: FlutterFlowTheme.of(context).bodyText1,
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.normal,
+                                  ),
                         ),
                       ),
                     ],
@@ -585,27 +605,25 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                       final quizzesCreateData = {
                         ...createQuizzesRecordData(
                           q1Correct: q1CorrectAnswerController.text,
-                          question1: '',
+                          question1: question1Controller.text,
                         ),
-                        'q1Answers': [q1CorrectAnswerController.text],
+                        'q1Answers': functions.quizAnswersasStringList(
+                            q1Answer1Controller.text,
+                            q1Answer2Controller.text,
+                            q1Answer3Controller.text,
+                            q1Answer4Controller.text),
                       };
                       var quizzesRecordReference =
                           QuizzesRecord.collection.doc();
                       await quizzesRecordReference.set(quizzesCreateData);
                       recNewQuiz = QuizzesRecord.getDocumentFromData(
                           quizzesCreateData, quizzesRecordReference);
-
-                      final quizzesUpdateData = {
-                        'q1Answers':
-                            FieldValue.arrayUnion([q1Answer1Controller.text]),
-                      };
-                      await recNewQuiz.reference.update(quizzesUpdateData);
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => CreateQuizQ2Widget(
                             recIssue: widget.recIssue,
-                            recNewQuiz: recNewQuiz,
+                            recQuiz: recNewQuiz,
                           ),
                         ),
                       );

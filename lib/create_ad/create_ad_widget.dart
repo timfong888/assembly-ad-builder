@@ -126,6 +126,28 @@ class _CreateAdWidgetState extends State<CreateAdWidget> {
                                     FlutterFlowTheme.of(context).primaryBtnText,
                               ),
                         ),
+                        Text(
+                          widget.recordIssue.ballotID,
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'Poppins',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                fontWeight: FontWeight.normal,
+                              ),
+                        ),
+                        Text(
+                          widget.recordIssue.title,
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'Poppins',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                fontWeight: FontWeight.normal,
+                              ),
+                        ),
                         InkWell(
                           onTap: () async {
                             await Navigator.push(
@@ -136,7 +158,7 @@ class _CreateAdWidgetState extends State<CreateAdWidget> {
                             );
                           },
                           child: Text(
-                            '>   Create Ad',
+                            ' >   Create Ad >',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
@@ -144,6 +166,29 @@ class _CreateAdWidgetState extends State<CreateAdWidget> {
                                           .primaryBtnText,
                                     ),
                           ),
+                        ),
+                        Text(
+                          '     Quiz >',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'Poppins',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                fontWeight: FontWeight.normal,
+                                fontStyle: FontStyle.italic,
+                              ),
+                        ),
+                        Text(
+                          '   Create Argument',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'Poppins',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                       ],
                     ),
@@ -158,27 +203,6 @@ class _CreateAdWidgetState extends State<CreateAdWidget> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'Issue: ',
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                            ),
-                            Text(
-                              widget.recordIssue.ballotID,
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                            ),
-                            Text(
-                              ':  ',
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                            ),
-                            Text(
-                              widget.recordIssue.title,
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                            ),
-                          ],
-                        ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -603,15 +627,6 @@ class _CreateAdWidgetState extends State<CreateAdWidget> {
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'Hello World',
-                              style: FlutterFlowTheme.of(context).bodyText1,
                             ),
                           ],
                         ),

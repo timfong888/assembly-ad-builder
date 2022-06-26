@@ -17,11 +17,13 @@ class EditAdWidget extends StatefulWidget {
     this.recordAd,
     this.recordIssue,
     this.recCatalog,
+    this.recQuiz,
   }) : super(key: key);
 
   final AdsRecord recordAd;
   final IssuesRecord recordIssue;
   final CatalogRecord recCatalog;
+  final QuizzesRecord recQuiz;
 
   @override
   _EditAdWidgetState createState() => _EditAdWidgetState();

@@ -109,12 +109,22 @@ class _EditCatalogWidgetState extends State<EditCatalogWidget> {
                               ),
                             ),
                             Text(
-                              '>  Update Catalog',
+                              '>  Update Catalog. ',
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
                                     fontFamily: 'Poppins',
                                     color: Color(0xFFFDFCDC),
+                                  ),
+                            ),
+                            Text(
+                              widget.recCatalog.title,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBtnText,
                                   ),
                             ),
                             Padding(
@@ -146,6 +156,24 @@ class _EditCatalogWidgetState extends State<EditCatalogWidget> {
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBtnText,
+                                            ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () async {
+                                        await launchURL(
+                                            'https://docs.assembly.digital/how-to-build-your-ads');
+                                      },
+                                      child: Text(
+                                        'How To Create an Ad',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBtnText,
+                                              fontWeight: FontWeight.w300,
                                             ),
                                       ),
                                     ),

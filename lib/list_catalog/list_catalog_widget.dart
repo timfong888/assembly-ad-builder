@@ -30,7 +30,7 @@ class _ListCatalogWidgetState extends State<ListCatalogWidget> {
         backgroundColor: Color(0xFF0081A7),
         automaticallyImplyLeading: false,
         title: Text(
-          'List of Catalogs / Slates',
+          'List of Catalogs / Slates (only an Admin can create a new Slate)',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: Colors.white,

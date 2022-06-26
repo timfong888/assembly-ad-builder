@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../create_quiz_q2/create_quiz_q2_widget.dart';
+import '../display_full_ad/display_full_ad_widget.dart';
 import '../edit_ad/edit_ad_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -15,8 +15,8 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EditQuizWidget extends StatefulWidget {
-  const EditQuizWidget({
+class EditQuiz2Widget extends StatefulWidget {
+  const EditQuiz2Widget({
     Key key,
     this.recordAd,
     this.refIssue,
@@ -32,32 +32,32 @@ class EditQuizWidget extends StatefulWidget {
   final CatalogRecord recCatalog;
 
   @override
-  _EditQuizWidgetState createState() => _EditQuizWidgetState();
+  _EditQuiz2WidgetState createState() => _EditQuiz2WidgetState();
 }
 
-class _EditQuizWidgetState extends State<EditQuizWidget> {
-  TextEditingController q1Answer1Controller;
-  TextEditingController q1CorrectAnswerController;
-  TextEditingController question1Controller;
-  TextEditingController q1Answer2Controller;
-  TextEditingController q1Answer3Controller;
-  TextEditingController q1Answer4Controller;
+class _EditQuiz2WidgetState extends State<EditQuiz2Widget> {
+  TextEditingController q2Answer1Controller;
+  TextEditingController q2CorrectAnswerController;
+  TextEditingController question2Controller;
+  TextEditingController q2Answer2Controller;
+  TextEditingController q2Answer3Controller;
+  TextEditingController q2Answer4Controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    q1Answer1Controller = TextEditingController(
-        text: functions.returnQuizAnswer(widget.recQuiz, 0, 1));
-    q1CorrectAnswerController =
-        TextEditingController(text: widget.recQuiz.q1Correct);
-    question1Controller = TextEditingController(text: widget.recQuiz.question1);
-    q1Answer2Controller = TextEditingController(
-        text: functions.returnQuizAnswer(widget.recQuiz, 1, 1));
-    q1Answer3Controller = TextEditingController(
-        text: functions.returnQuizAnswer(widget.recQuiz, 2, 1));
-    q1Answer4Controller = TextEditingController(
-        text: functions.returnQuizAnswer(widget.recQuiz, 3, 1));
+    q2Answer1Controller = TextEditingController(
+        text: functions.returnQuizAnswer(widget.recQuiz, 0, 2));
+    q2CorrectAnswerController =
+        TextEditingController(text: widget.recQuiz.q2Correct);
+    question2Controller = TextEditingController(text: widget.recQuiz.question2);
+    q2Answer2Controller = TextEditingController(
+        text: functions.returnQuizAnswer(widget.recQuiz, 1, 2));
+    q2Answer3Controller = TextEditingController(
+        text: functions.returnQuizAnswer(widget.recQuiz, 2, 2));
+    q2Answer4Controller = TextEditingController(
+        text: functions.returnQuizAnswer(widget.recQuiz, 3, 2));
   }
 
   @override
@@ -278,7 +278,7 @@ class _EditQuizWidgetState extends State<EditQuizWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     15, 5, 15, 5),
                                 child: TextFormField(
-                                  controller: q1CorrectAnswerController,
+                                  controller: q2CorrectAnswerController,
                                   autofocus: true,
                                   obscureText: false,
                                   decoration: InputDecoration(
@@ -334,9 +334,9 @@ class _EditQuizWidgetState extends State<EditQuizWidget> {
                         height: 100,
                         decoration: BoxDecoration(),
                         child: TextFormField(
-                          controller: question1Controller,
+                          controller: question2Controller,
                           onChanged: (_) => EasyDebounce.debounce(
-                            'question1Controller',
+                            'question2Controller',
                             Duration(milliseconds: 2000),
                             () => setState(() {}),
                           ),
@@ -395,7 +395,7 @@ class _EditQuizWidgetState extends State<EditQuizWidget> {
                         height: 100,
                         decoration: BoxDecoration(),
                         child: TextFormField(
-                          controller: q1Answer1Controller,
+                          controller: q2Answer1Controller,
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -451,7 +451,7 @@ class _EditQuizWidgetState extends State<EditQuizWidget> {
                         height: 100,
                         decoration: BoxDecoration(),
                         child: TextFormField(
-                          controller: q1Answer2Controller,
+                          controller: q2Answer2Controller,
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -507,7 +507,7 @@ class _EditQuizWidgetState extends State<EditQuizWidget> {
                         height: 100,
                         decoration: BoxDecoration(),
                         child: TextFormField(
-                          controller: q1Answer3Controller,
+                          controller: q2Answer3Controller,
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -563,7 +563,7 @@ class _EditQuizWidgetState extends State<EditQuizWidget> {
                         height: 100,
                         decoration: BoxDecoration(),
                         child: TextFormField(
-                          controller: q1Answer4Controller,
+                          controller: q2Answer4Controller,
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -602,34 +602,29 @@ class _EditQuizWidgetState extends State<EditQuizWidget> {
                     onPressed: () async {
                       final quizzesUpdateData = {
                         ...createQuizzesRecordData(
-                          q1Correct: q1CorrectAnswerController.text,
-                          question1: question1Controller.text,
+                          q2Correct: q2CorrectAnswerController.text,
+                          question2: question2Controller.text,
                         ),
-                        'q1Answers': FieldValue.arrayUnion([
-                          functions
-                              .quizAnswersasStringList(
-                                  q1Answer3Controller.text,
-                                  q1Answer2Controller.text,
-                                  q1Answer3Controller.text,
-                                  q1Answer4Controller.text)
-                              .length
-                              .toString()
-                        ]),
+                        'q2Answers': functions.quizAnswersasStringList(
+                            q2Answer1Controller.text,
+                            q2Answer2Controller.text,
+                            q2Answer3Controller.text,
+                            q2Answer4Controller.text),
                       };
                       await widget.recQuiz.reference.update(quizzesUpdateData);
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CreateQuizQ2Widget(
+                          builder: (context) => DisplayFullAdWidget(
                             recIssue: widget.recIssue,
-                            recordAd: widget.recordAd,
                             recQuiz: widget.recQuiz,
                             recCatalog: widget.recCatalog,
+                            recAd: widget.recordAd,
                           ),
                         ),
                       );
                     },
-                    text: 'Next Quiz Question',
+                    text: 'Update Quiz',
                     options: FFButtonOptions(
                       width: 350,
                       height: 40,
