@@ -10,31 +10,24 @@ abstract class IssuesRecord
     implements Built<IssuesRecord, IssuesRecordBuilder> {
   static Serializer<IssuesRecord> get serializer => _$issuesRecordSerializer;
 
-  @nullable
-  String get title;
+  String? get title;
 
-  @nullable
-  String get summary;
+  String? get summary;
 
-  @nullable
-  String get state;
+  String? get state;
 
-  @nullable
-  DocumentReference get refCatalog;
+  DocumentReference? get refCatalog;
 
-  @nullable
   @BuiltValueField(wireName: 'BallotID')
-  String get ballotID;
+  String? get ballotID;
 
-  @nullable
-  DateTime get modifiedDate;
+  DateTime? get modifiedDate;
 
-  @nullable
-  DateTime get endDate;
+  DateTime? get endDate;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ref;
+  DocumentReference get reference => ref!;
 
   static void _initializeBuilder(IssuesRecordBuilder builder) => builder
     ..title = ''
@@ -47,11 +40,11 @@ abstract class IssuesRecord
 
   static Stream<IssuesRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<IssuesRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   IssuesRecord._();
   factory IssuesRecord([void Function(IssuesRecordBuilder) updates]) =
@@ -60,17 +53,17 @@ abstract class IssuesRecord
   static IssuesRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createIssuesRecordData({
-  String title,
-  String summary,
-  String state,
-  DocumentReference refCatalog,
-  String ballotID,
-  DateTime modifiedDate,
-  DateTime endDate,
+  String? title,
+  String? summary,
+  String? state,
+  DocumentReference? refCatalog,
+  String? ballotID,
+  DateTime? modifiedDate,
+  DateTime? endDate,
 }) =>
     serializers.toFirestore(
         IssuesRecord.serializer,

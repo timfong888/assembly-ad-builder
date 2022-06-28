@@ -3,11 +3,11 @@ import 'package:rxdart/rxdart.dart';
 
 class AdBuilderFirebaseUser {
   AdBuilderFirebaseUser(this.user);
-  User user;
+  User? user;
   bool get loggedIn => user != null;
 }
 
-AdBuilderFirebaseUser currentUser;
+AdBuilderFirebaseUser? currentUser;
 bool get loggedIn => currentUser?.loggedIn ?? false;
 Stream<AdBuilderFirebaseUser> adBuilderFirebaseUserStream() => FirebaseAuth
     .instance

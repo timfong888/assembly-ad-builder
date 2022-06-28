@@ -12,35 +12,35 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditIssueWidget extends StatefulWidget {
   const EditIssueWidget({
-    Key key,
+    Key? key,
     this.recCatalog,
     this.refCatalog,
     this.recIssue,
   }) : super(key: key);
 
-  final CatalogRecord recCatalog;
-  final DocumentReference refCatalog;
-  final IssuesRecord recIssue;
+  final CatalogRecord? recCatalog;
+  final DocumentReference? refCatalog;
+  final IssuesRecord? recIssue;
 
   @override
   _EditIssueWidgetState createState() => _EditIssueWidgetState();
 }
 
 class _EditIssueWidgetState extends State<EditIssueWidget> {
-  TextEditingController ballotIDFieldController;
-  TextEditingController titleController;
-  TextEditingController summaryFieldController;
-  TextEditingController endDateFieldController;
+  TextEditingController? ballotIDFieldController;
+  TextEditingController? titleController;
+  TextEditingController? summaryFieldController;
+  TextEditingController? endDateFieldController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
     ballotIDFieldController =
-        TextEditingController(text: widget.recIssue.ballotID);
-    titleController = TextEditingController(text: widget.recIssue.title);
+        TextEditingController(text: widget.recIssue!.ballotID);
+    titleController = TextEditingController(text: widget.recIssue!.title);
     summaryFieldController =
-        TextEditingController(text: widget.recIssue.summary);
+        TextEditingController(text: widget.recIssue!.summary);
     endDateFieldController = TextEditingController();
   }
 
@@ -91,7 +91,7 @@ class _EditIssueWidgetState extends State<EditIssueWidget> {
                             ),
                       ),
                       Text(
-                        widget.recCatalog.title,
+                        widget.recCatalog!.title!,
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Poppins',
                               color: FlutterFlowTheme.of(context).lineColor,
@@ -389,12 +389,12 @@ class _EditIssueWidgetState extends State<EditIssueWidget> {
                             FFButtonWidget(
                               onPressed: () async {
                                 final issuesUpdateData = createIssuesRecordData(
-                                  title: titleController.text,
-                                  summary: summaryFieldController.text,
-                                  ballotID: ballotIDFieldController.text,
+                                  title: titleController!.text,
+                                  summary: summaryFieldController!.text,
+                                  ballotID: ballotIDFieldController!.text,
                                   modifiedDate: getCurrentTimestamp,
                                 );
-                                await widget.recIssue.reference
+                                await widget.recIssue!.reference
                                     .update(issuesUpdateData);
                                 await Navigator.push(
                                   context,

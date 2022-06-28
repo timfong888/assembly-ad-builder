@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AdVerticalNavWidget extends StatefulWidget {
-  const AdVerticalNavWidget({Key key}) : super(key: key);
+  const AdVerticalNavWidget({Key? key}) : super(key: key);
 
   @override
   _AdVerticalNavWidgetState createState() => _AdVerticalNavWidgetState();

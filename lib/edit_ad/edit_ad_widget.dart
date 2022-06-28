@@ -13,39 +13,39 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditAdWidget extends StatefulWidget {
   const EditAdWidget({
-    Key key,
+    Key? key,
     this.recordAd,
     this.recordIssue,
     this.recCatalog,
     this.recQuiz,
   }) : super(key: key);
 
-  final AdsRecord recordAd;
-  final IssuesRecord recordIssue;
-  final CatalogRecord recCatalog;
-  final QuizzesRecord recQuiz;
+  final AdsRecord? recordAd;
+  final IssuesRecord? recordIssue;
+  final CatalogRecord? recCatalog;
+  final QuizzesRecord? recQuiz;
 
   @override
   _EditAdWidgetState createState() => _EditAdWidgetState();
 }
 
 class _EditAdWidgetState extends State<EditAdWidget> {
-  TextEditingController argumentController;
-  TextEditingController headlineController;
-  TextEditingController summaryFieldController;
-  TextEditingController learnTokensController;
+  TextEditingController? argumentController;
+  TextEditingController? headlineController;
+  TextEditingController? summaryFieldController;
+  TextEditingController? learnTokensController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    argumentController = TextEditingController(text: widget.recordAd.argument);
-    headlineController = TextEditingController(text: widget.recordAd.headline);
+    argumentController = TextEditingController(text: widget.recordAd!.argument);
+    headlineController = TextEditingController(text: widget.recordAd!.headline);
     summaryFieldController =
-        TextEditingController(text: widget.recordAd.summary);
+        TextEditingController(text: widget.recordAd!.summary);
     learnTokensController =
-        TextEditingController(text: widget.recordAd.learnTokens.toString());
+        TextEditingController(text: widget.recordAd!.learnTokens?.toString());
   }
 
   @override
@@ -163,7 +163,7 @@ class _EditAdWidgetState extends State<EditAdWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          widget.recordIssue.ballotID,
+                          widget.recordIssue!.ballotID!,
                           style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                         Text(
@@ -171,7 +171,7 @@ class _EditAdWidgetState extends State<EditAdWidget> {
                           style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                         Text(
-                          widget.recordIssue.title,
+                          widget.recordIssue!.title!,
                           style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                       ],
@@ -484,27 +484,27 @@ class _EditAdWidgetState extends State<EditAdWidget> {
                                         }
                                         List<IssuesRecord>
                                             buttonIssuesRecordList =
-                                            snapshot.data;
+                                            snapshot.data!;
                                         // Return an empty Container when the document does not exist.
-                                        if (snapshot.data.isEmpty) {
+                                        if (snapshot.data!.isEmpty) {
                                           return Container();
                                         }
                                         final buttonIssuesRecord =
-                                            buttonIssuesRecordList.isNotEmpty
-                                                ? buttonIssuesRecordList.first
-                                                : null;
+                                            buttonIssuesRecordList.first;
                                         return FFButtonWidget(
                                           onPressed: () async {
                                             final adsUpdateData =
                                                 createAdsRecordData(
-                                              headline: headlineController.text,
-                                              argument: argumentController.text,
+                                              headline:
+                                                  headlineController!.text,
+                                              argument:
+                                                  argumentController!.text,
                                               learnTokens: int.parse(
-                                                  learnTokensController.text),
+                                                  learnTokensController!.text),
                                               summary:
-                                                  summaryFieldController.text,
+                                                  summaryFieldController!.text,
                                             );
-                                            await widget.recordAd.reference
+                                            await widget.recordAd!.reference
                                                 .update(adsUpdateData);
                                             await Navigator.push(
                                               context,

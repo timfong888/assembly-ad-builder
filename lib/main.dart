@@ -22,15 +22,15 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 
   static _MyAppState of(BuildContext context) =>
-      context.findAncestorStateOfType<_MyAppState>();
+      context.findAncestorStateOfType<_MyAppState>()!;
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale;
+  Locale? _locale;
   ThemeMode _themeMode = ThemeMode.system;
 
-  Stream<AdBuilderFirebaseUser> userStream;
-  AdBuilderFirebaseUser initialUser;
+  late Stream<AdBuilderFirebaseUser> userStream;
+  AdBuilderFirebaseUser? initialUser;
   bool displaySplashImage = true;
 
   @override
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             )
-          : currentUser.loggedIn
+          : currentUser!.loggedIn
               ? ListCatalogWidget()
               : LoginWidget(),
     );

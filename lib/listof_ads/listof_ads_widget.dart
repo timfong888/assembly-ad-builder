@@ -17,13 +17,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ListofAdsWidget extends StatefulWidget {
   const ListofAdsWidget({
-    Key key,
+    Key? key,
     this.recIssue,
     this.recCatalog,
   }) : super(key: key);
 
-  final IssuesRecord recIssue;
-  final CatalogRecord recCatalog;
+  final IssuesRecord? recIssue;
+  final CatalogRecord? recCatalog;
 
   @override
   _ListofAdsWidgetState createState() => _ListofAdsWidgetState();
@@ -103,7 +103,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
                         child: Text(
-                          widget.recIssue.ballotID,
+                          widget.recIssue!.ballotID!,
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
@@ -116,7 +116,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                         ),
                       ),
                       Text(
-                        widget.recIssue.title,
+                        widget.recIssue!.title!,
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Poppins',
                               color:
@@ -354,7 +354,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                     child: StreamBuilder<List<AdsRecord>>(
                       stream: queryAdsRecord(
                         queryBuilder: (adsRecord) => adsRecord.where('issueID',
-                            isEqualTo: widget.recIssue.reference),
+                            isEqualTo: widget.recIssue!.reference),
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
@@ -369,7 +369,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                             ),
                           );
                         }
-                        List<AdsRecord> listViewAdsRecordList = snapshot.data;
+                        List<AdsRecord> listViewAdsRecordList = snapshot.data!;
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           scrollDirection: Axis.vertical,
@@ -395,7 +395,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          listViewAdsRecord.headline,
+                                          listViewAdsRecord!.headline!,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
@@ -420,7 +420,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          listViewAdsRecord.summary,
+                                          listViewAdsRecord!.summary!,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
@@ -443,7 +443,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        listViewAdsRecord.learnTokens
+                                        listViewAdsRecord!.learnTokens!
                                             .toString(),
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
@@ -470,7 +470,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                       children: [
                                         StreamBuilder<AdsRecord>(
                                           stream: AdsRecord.getDocument(
-                                              listViewAdsRecord.reference),
+                                              listViewAdsRecord!.reference),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.
                                             if (!snapshot.hasData) {
@@ -486,7 +486,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                               );
                                             }
                                             final editAdRAdsRecord =
-                                                snapshot.data;
+                                                snapshot.data!;
                                             return FlutterFlowIconButton(
                                               borderColor: Colors.transparent,
                                               borderRadius: 30,
@@ -516,7 +516,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                         ),
                                         StreamBuilder<QuizzesRecord>(
                                           stream: QuizzesRecord.getDocument(
-                                              listViewAdsRecord.refQuiz),
+                                              listViewAdsRecord!.refQuiz!),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.
                                             if (!snapshot.hasData) {
@@ -532,7 +532,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                               );
                                             }
                                             final editQuizzesQuizzesRecord =
-                                                snapshot.data;
+                                                snapshot.data!;
                                             return FlutterFlowIconButton(
                                               borderColor: Colors.transparent,
                                               borderRadius: 30,
@@ -569,7 +569,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                                   25, 0, 0, 0),
                                           child: StreamBuilder<QuizzesRecord>(
                                             stream: QuizzesRecord.getDocument(
-                                                listViewAdsRecord.refQuiz),
+                                                listViewAdsRecord!.refQuiz!),
                                             builder: (context, snapshot) {
                                               // Customize what your widget looks like when it's loading.
                                               if (!snapshot.hasData) {
@@ -585,7 +585,7 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                                 );
                                               }
                                               final showAdQuizzesRecord =
-                                                  snapshot.data;
+                                                  snapshot.data!;
                                               return FlutterFlowIconButton(
                                                 borderColor: Colors.transparent,
                                                 borderRadius: 30,
@@ -628,13 +628,14 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                             onPressed: () async {
                                               final adsUpdateData =
                                                   createAdsRecordData(
-                                                boolActive: listViewAdsRecord
+                                                boolActive: listViewAdsRecord!
                                                     .boolActive,
                                               );
-                                              await listViewAdsRecord.reference
+                                              await listViewAdsRecord!.reference
                                                   .update(adsUpdateData);
                                             },
-                                            value: listViewAdsRecord.boolActive,
+                                            value:
+                                                listViewAdsRecord!.boolActive!,
                                             onIcon: Icon(
                                               Icons.toggle_on,
                                               color: Color(0xFF07CE07),

@@ -9,33 +9,25 @@ part 'ads_record.g.dart';
 abstract class AdsRecord implements Built<AdsRecord, AdsRecordBuilder> {
   static Serializer<AdsRecord> get serializer => _$adsRecordSerializer;
 
-  @nullable
-  String get headline;
+  String? get headline;
 
-  @nullable
-  String get summary;
+  String? get summary;
 
-  @nullable
-  DocumentReference get issueID;
+  DocumentReference? get issueID;
 
-  @nullable
-  int get learnTokens;
+  int? get learnTokens;
 
-  @nullable
-  String get argument;
+  String? get argument;
 
-  @nullable
-  DocumentReference get refQuiz;
+  DocumentReference? get refQuiz;
 
-  @nullable
-  String get adRecordID;
+  String? get adRecordID;
 
-  @nullable
-  bool get boolActive;
+  bool? get boolActive;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ref;
+  DocumentReference get reference => ref!;
 
   static void _initializeBuilder(AdsRecordBuilder builder) => builder
     ..headline = ''
@@ -50,11 +42,11 @@ abstract class AdsRecord implements Built<AdsRecord, AdsRecordBuilder> {
 
   static Stream<AdsRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<AdsRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   AdsRecord._();
   factory AdsRecord([void Function(AdsRecordBuilder) updates]) = _$AdsRecord;
@@ -62,18 +54,18 @@ abstract class AdsRecord implements Built<AdsRecord, AdsRecordBuilder> {
   static AdsRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createAdsRecordData({
-  String headline,
-  String summary,
-  DocumentReference issueID,
-  int learnTokens,
-  String argument,
-  DocumentReference refQuiz,
-  String adRecordID,
-  bool boolActive,
+  String? headline,
+  String? summary,
+  DocumentReference? issueID,
+  int? learnTokens,
+  String? argument,
+  DocumentReference? refQuiz,
+  String? adRecordID,
+  bool? boolActive,
 }) =>
     serializers.toFirestore(
         AdsRecord.serializer,

@@ -16,31 +16,31 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CreateQuizWidget extends StatefulWidget {
   const CreateQuizWidget({
-    Key key,
+    Key? key,
     this.recordAd,
     this.refIssue,
     this.recIssue,
     this.recCatalog,
   }) : super(key: key);
 
-  final AdsRecord recordAd;
-  final DocumentReference refIssue;
-  final IssuesRecord recIssue;
-  final CatalogRecord recCatalog;
+  final AdsRecord? recordAd;
+  final DocumentReference? refIssue;
+  final IssuesRecord? recIssue;
+  final CatalogRecord? recCatalog;
 
   @override
   _CreateQuizWidgetState createState() => _CreateQuizWidgetState();
 }
 
 class _CreateQuizWidgetState extends State<CreateQuizWidget> {
-  QuizzesRecord recNewQuiz;
-  TextEditingController q1Answer1Controller;
-  TextEditingController q1CorrectAnswerController;
-  double correctAnswerIndexValue;
-  TextEditingController question1Controller;
-  TextEditingController q1Answer2Controller;
-  TextEditingController q1Answer3Controller;
-  TextEditingController q1Answer4Controller;
+  QuizzesRecord? recNewQuiz;
+  TextEditingController? q1Answer1Controller;
+  TextEditingController? q1CorrectAnswerController;
+  double? correctAnswerIndexValue;
+  TextEditingController? question1Controller;
+  TextEditingController? q1Answer2Controller;
+  TextEditingController? q1Answer3Controller;
+  TextEditingController? q1Answer4Controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -52,7 +52,7 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
     q1Answer2Controller = TextEditingController();
     q1Answer3Controller = TextEditingController();
     q1Answer4Controller = TextEditingController();
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance?.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -223,7 +223,7 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            widget.recIssue.ballotID,
+                            widget.recIssue!.ballotID!,
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
@@ -233,7 +233,7 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                                     ),
                           ),
                           Text(
-                            widget.recIssue.title,
+                            widget.recIssue!.title!,
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
@@ -680,16 +680,16 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                     onPressed: () async {
                       final quizzesCreateData = {
                         ...createQuizzesRecordData(
-                          q1Correct: q1CorrectAnswerController.text,
-                          question1: question1Controller.text,
+                          q1Correct: q1CorrectAnswerController!.text,
+                          question1: question1Controller!.text,
                           q1correctAnswerIndex: correctAnswerIndexValue,
                         ),
                         'q1Answers': functions.quizAnswersasStringList2(
-                            q1Answer1Controller.text,
-                            q1Answer2Controller.text,
-                            q1Answer3Controller.text,
-                            q1Answer4Controller.text,
-                            q1CorrectAnswerController.text,
+                            q1Answer1Controller!.text,
+                            q1Answer2Controller!.text,
+                            q1Answer3Controller!.text,
+                            q1Answer4Controller!.text,
+                            q1CorrectAnswerController!.text,
                             correctAnswerIndexValue),
                       };
                       var quizzesRecordReference =

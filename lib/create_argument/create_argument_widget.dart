@@ -14,26 +14,26 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CreateArgumentWidget extends StatefulWidget {
   const CreateArgumentWidget({
-    Key key,
+    Key? key,
     this.recordIssue,
     this.recQuiz,
     this.recCatalog,
   }) : super(key: key);
 
-  final IssuesRecord recordIssue;
-  final QuizzesRecord recQuiz;
-  final CatalogRecord recCatalog;
+  final IssuesRecord? recordIssue;
+  final QuizzesRecord? recQuiz;
+  final CatalogRecord? recCatalog;
 
   @override
   _CreateArgumentWidgetState createState() => _CreateArgumentWidgetState();
 }
 
 class _CreateArgumentWidgetState extends State<CreateArgumentWidget> {
-  AdsRecord recNewAd;
-  TextEditingController argumentController;
-  TextEditingController headlineController;
-  TextEditingController summaryFieldController;
-  TextEditingController learnTokensController;
+  AdsRecord? recNewAd;
+  TextEditingController? argumentController;
+  TextEditingController? headlineController;
+  TextEditingController? summaryFieldController;
+  TextEditingController? learnTokensController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -127,7 +127,7 @@ class _CreateArgumentWidgetState extends State<CreateArgumentWidget> {
                               ),
                         ),
                         Text(
-                          widget.recordIssue.ballotID,
+                          widget.recordIssue!.ballotID!,
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
@@ -138,7 +138,7 @@ class _CreateArgumentWidgetState extends State<CreateArgumentWidget> {
                               ),
                         ),
                         Text(
-                          widget.recordIssue.title,
+                          widget.recordIssue!.title!,
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
@@ -560,17 +560,18 @@ class _CreateArgumentWidgetState extends State<CreateArgumentWidget> {
                                               final adsCreateData =
                                                   createAdsRecordData(
                                                 headline:
-                                                    headlineController.text,
+                                                    headlineController!.text,
                                                 argument:
-                                                    argumentController.text,
+                                                    argumentController!.text,
                                                 learnTokens: int.parse(
-                                                    learnTokensController.text),
+                                                    learnTokensController!
+                                                        .text),
                                                 refQuiz:
-                                                    widget.recQuiz.reference,
+                                                    widget.recQuiz!.reference,
                                                 issueID: widget
-                                                    .recordIssue.reference,
-                                                summary:
-                                                    summaryFieldController.text,
+                                                    .recordIssue!.reference,
+                                                summary: summaryFieldController!
+                                                    .text,
                                                 adRecordID:
                                                     random_data.randomString(
                                                   10,

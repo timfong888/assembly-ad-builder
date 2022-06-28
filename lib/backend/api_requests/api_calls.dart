@@ -6,12 +6,12 @@ export 'api_manager.dart' show ApiCallResponse;
 
 class CreateAdCall {
   static Future<ApiCallResponse> call({
-    int id,
-    String headline = '',
-    String argument = '',
-    int learnTokens,
-    int issueId,
-    String createdAt = '',
+    int? id,
+    String? headline = '',
+    String? argument = '',
+    int? learnTokens,
+    int? issueId,
+    String? createdAt = '',
   }) {
     final body = '''
 {
