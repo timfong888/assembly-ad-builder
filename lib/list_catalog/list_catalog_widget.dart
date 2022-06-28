@@ -9,11 +9,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ListCatalogWidget extends StatefulWidget {
   const ListCatalogWidget({
-    Key key,
+    Key? key,
     this.recIssue,
   }) : super(key: key);
 
-  final IssuesRecord recIssue;
+  final IssuesRecord? recIssue;
 
   @override
   _ListCatalogWidgetState createState() => _ListCatalogWidgetState();
@@ -227,7 +227,7 @@ class _ListCatalogWidgetState extends State<ListCatalogWidget> {
                             );
                           }
                           List<CatalogRecord> listViewCatalogRecordList =
-                              snapshot.data;
+                              snapshot.data!;
                           return ListView.builder(
                             padding: EdgeInsets.zero,
                             scrollDirection: Axis.vertical,
@@ -251,7 +251,7 @@ class _ListCatalogWidgetState extends State<ListCatalogWidget> {
                                           color: Color(0xFFEEEEEE),
                                         ),
                                         child: Image.network(
-                                          listViewCatalogRecord.logoUrl,
+                                          listViewCatalogRecord!.logoUrl!,
                                           width: 100,
                                           height: 100,
                                           fit: BoxFit.contain,
@@ -273,7 +273,7 @@ class _ListCatalogWidgetState extends State<ListCatalogWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              listViewCatalogRecord.title,
+                                              listViewCatalogRecord!.title!,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText1
@@ -302,7 +302,7 @@ class _ListCatalogWidgetState extends State<ListCatalogWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              listViewCatalogRecord.summary,
+                                              listViewCatalogRecord!.summary!,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText1
@@ -328,8 +328,10 @@ class _ListCatalogWidgetState extends State<ListCatalogWidget> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            dateTimeFormat('yMMMd',
-                                                listViewCatalogRecord.endDate),
+                                            dateTimeFormat(
+                                                'yMMMd',
+                                                listViewCatalogRecord!
+                                                    .endDate!),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1

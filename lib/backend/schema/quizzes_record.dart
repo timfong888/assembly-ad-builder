@@ -10,33 +10,25 @@ abstract class QuizzesRecord
     implements Built<QuizzesRecord, QuizzesRecordBuilder> {
   static Serializer<QuizzesRecord> get serializer => _$quizzesRecordSerializer;
 
-  @nullable
-  BuiltList<String> get q1Answers;
+  BuiltList<String>? get q1Answers;
 
-  @nullable
-  BuiltList<String> get q2Answers;
+  BuiltList<String>? get q2Answers;
 
-  @nullable
-  String get q1Correct;
+  String? get q1Correct;
 
-  @nullable
-  String get q2Correct;
+  String? get q2Correct;
 
-  @nullable
-  String get question1;
+  String? get question1;
 
-  @nullable
-  String get question2;
+  String? get question2;
 
-  @nullable
-  double get q1correctAnswerIndex;
+  double? get q1correctAnswerIndex;
 
-  @nullable
-  double get q2correctAnswerIndex;
+  double? get q2correctAnswerIndex;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ref;
+  DocumentReference get reference => ref!;
 
   static void _initializeBuilder(QuizzesRecordBuilder builder) => builder
     ..q1Answers = ListBuilder()
@@ -53,11 +45,11 @@ abstract class QuizzesRecord
 
   static Stream<QuizzesRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<QuizzesRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   QuizzesRecord._();
   factory QuizzesRecord([void Function(QuizzesRecordBuilder) updates]) =
@@ -66,16 +58,16 @@ abstract class QuizzesRecord
   static QuizzesRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createQuizzesRecordData({
-  String q1Correct,
-  String q2Correct,
-  String question1,
-  String question2,
-  double q1correctAnswerIndex,
-  double q2correctAnswerIndex,
+  String? q1Correct,
+  String? q2Correct,
+  String? question1,
+  String? question2,
+  double? q1correctAnswerIndex,
+  double? q2correctAnswerIndex,
 }) =>
     serializers.toFirestore(
         QuizzesRecord.serializer,

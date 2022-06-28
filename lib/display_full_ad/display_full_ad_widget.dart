@@ -14,32 +14,32 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class DisplayFullAdWidget extends StatefulWidget {
   const DisplayFullAdWidget({
-    Key key,
+    Key? key,
     this.recIssue,
     this.recCatalog,
     this.recAd,
     this.recQuiz,
   }) : super(key: key);
 
-  final IssuesRecord recIssue;
-  final CatalogRecord recCatalog;
-  final AdsRecord recAd;
-  final QuizzesRecord recQuiz;
+  final IssuesRecord? recIssue;
+  final CatalogRecord? recCatalog;
+  final AdsRecord? recAd;
+  final QuizzesRecord? recQuiz;
 
   @override
   _DisplayFullAdWidgetState createState() => _DisplayFullAdWidgetState();
 }
 
 class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
-  PageController pageViewController;
-  String radioButtonValue1;
-  String radioButtonValue2;
+  PageController? pageViewController;
+  String? radioButtonValue1;
+  String? radioButtonValue2;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuizzesRecord>(
-      stream: QuizzesRecord.getDocument(widget.recQuiz.reference),
+      stream: QuizzesRecord.getDocument(widget.recQuiz!.reference),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -53,7 +53,7 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
             ),
           );
         }
-        final displayFullAdQuizzesRecord = snapshot.data;
+        final displayFullAdQuizzesRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -123,7 +123,7 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                             ),
                           ),
                           Text(
-                            widget.recIssue.ballotID,
+                            widget.recIssue!.ballotID!,
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
@@ -133,7 +133,7 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                     ),
                           ),
                           Text(
-                            widget.recIssue.title,
+                            widget.recIssue!.title!,
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
@@ -265,14 +265,14 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  widget.recIssue.ballotID,
+                                                  widget.recIssue!.ballotID!,
                                                   textAlign: TextAlign.start,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
                                                 ),
                                                 Text(
-                                                  widget.recIssue.title,
+                                                  widget.recIssue!.title!,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1
@@ -283,13 +283,13 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                                       ),
                                                 ),
                                                 Text(
-                                                  widget.recAd.headline,
+                                                  widget.recAd!.headline!,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
                                                 ),
                                                 Text(
-                                                  widget.recAd.summary,
+                                                  widget.recAd!.summary!,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1
@@ -300,7 +300,7 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                                       ),
                                                 ),
                                                 Text(
-                                                  widget.recAd.argument,
+                                                  widget.recAd!.argument!,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1
@@ -314,7 +314,7 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 15, 0, 0),
                                                   child: Text(
-                                                    widget.recQuiz.question1,
+                                                    widget.recQuiz!.question1!,
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1,
@@ -325,8 +325,8 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                                       .returnQuizAnswerStringList(
                                                           displayFullAdQuizzesRecord,
                                                           1,
-                                                          displayFullAdQuizzesRecord
-                                                              .q1Answers
+                                                          displayFullAdQuizzesRecord!
+                                                              .q1Answers!
                                                               .toList())
                                                       .toList(),
                                                   onChanged: (value) {
@@ -363,7 +363,7 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                                       .bodyText1,
                                                 ),
                                                 Text(
-                                                  widget.recQuiz.q1Correct,
+                                                  widget.recQuiz!.q1Correct!,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
@@ -372,7 +372,7 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 15, 0, 0),
                                                   child: Text(
-                                                    widget.recQuiz.question2,
+                                                    widget.recQuiz!.question2!,
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1,
@@ -383,8 +383,8 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                                       .returnQuizAnswerStringList(
                                                           displayFullAdQuizzesRecord,
                                                           2,
-                                                          displayFullAdQuizzesRecord
-                                                              .q2Answers
+                                                          displayFullAdQuizzesRecord!
+                                                              .q2Answers!
                                                               .toList())
                                                       .toList(),
                                                   onChanged: (value) {
@@ -421,7 +421,7 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                                       .bodyText1,
                                                 ),
                                                 Text(
-                                                  widget.recQuiz.q2Correct,
+                                                  widget.recQuiz!.q2Correct!,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
@@ -449,7 +449,7 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                           count: 2,
                                           axisDirection: Axis.vertical,
                                           onDotClicked: (i) {
-                                            pageViewController.animateToPage(
+                                            pageViewController!.animateToPage(
                                               i,
                                               duration:
                                                   Duration(milliseconds: 500),

@@ -17,13 +17,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ListIssuesWidget extends StatefulWidget {
   const ListIssuesWidget({
-    Key key,
+    Key? key,
     this.recCatalog,
     this.refCatalog,
   }) : super(key: key);
 
-  final CatalogRecord recCatalog;
-  final DocumentReference refCatalog;
+  final CatalogRecord? recCatalog;
+  final DocumentReference? refCatalog;
 
   @override
   _ListIssuesWidgetState createState() => _ListIssuesWidgetState();
@@ -79,7 +79,7 @@ class _ListIssuesWidgetState extends State<ListIssuesWidget> {
                             ),
                       ),
                       Text(
-                        widget.recCatalog.title,
+                        widget.recCatalog!.title!,
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Poppins',
                               color:
@@ -195,7 +195,7 @@ class _ListIssuesWidgetState extends State<ListIssuesWidget> {
                   stream: queryIssuesRecord(
                     queryBuilder: (issuesRecord) => issuesRecord.where(
                         'refCatalog',
-                        isEqualTo: widget.recCatalog.reference),
+                        isEqualTo: widget.recCatalog!.reference),
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
@@ -210,7 +210,8 @@ class _ListIssuesWidgetState extends State<ListIssuesWidget> {
                         ),
                       );
                     }
-                    List<IssuesRecord> listViewIssuesRecordList = snapshot.data;
+                    List<IssuesRecord> listViewIssuesRecordList =
+                        snapshot.data!;
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -252,13 +253,13 @@ class _ListIssuesWidgetState extends State<ListIssuesWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              listViewIssuesRecord.ballotID,
+                                              listViewIssuesRecord!.ballotID!,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText1,
                                             ),
                                             Text(
-                                              listViewIssuesRecord.title,
+                                              listViewIssuesRecord!.title!,
                                               textAlign: TextAlign.start,
                                               style:
                                                   FlutterFlowTheme.of(context)

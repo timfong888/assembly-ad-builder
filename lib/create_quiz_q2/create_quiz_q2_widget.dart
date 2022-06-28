@@ -16,7 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CreateQuizQ2Widget extends StatefulWidget {
   const CreateQuizQ2Widget({
-    Key key,
+    Key? key,
     this.recordAd,
     this.refIssue,
     this.recIssue,
@@ -24,24 +24,24 @@ class CreateQuizQ2Widget extends StatefulWidget {
     this.recCatalog,
   }) : super(key: key);
 
-  final AdsRecord recordAd;
-  final DocumentReference refIssue;
-  final IssuesRecord recIssue;
-  final QuizzesRecord recQuiz;
-  final CatalogRecord recCatalog;
+  final AdsRecord? recordAd;
+  final DocumentReference? refIssue;
+  final IssuesRecord? recIssue;
+  final QuizzesRecord? recQuiz;
+  final CatalogRecord? recCatalog;
 
   @override
   _CreateQuizQ2WidgetState createState() => _CreateQuizQ2WidgetState();
 }
 
 class _CreateQuizQ2WidgetState extends State<CreateQuizQ2Widget> {
-  TextEditingController q2Answer1Controller;
-  TextEditingController q2CorrectAnswerController;
-  double correctAnswerIndexValue;
-  TextEditingController question2Controller;
-  TextEditingController q2Answer2Controller;
-  TextEditingController q2Answer3Controller;
-  TextEditingController q2Answer4Controller;
+  TextEditingController? q2Answer1Controller;
+  TextEditingController? q2CorrectAnswerController;
+  double? correctAnswerIndexValue;
+  TextEditingController? question2Controller;
+  TextEditingController? q2Answer2Controller;
+  TextEditingController? q2Answer3Controller;
+  TextEditingController? q2Answer4Controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -53,7 +53,7 @@ class _CreateQuizQ2WidgetState extends State<CreateQuizQ2Widget> {
     q2Answer2Controller = TextEditingController();
     q2Answer3Controller = TextEditingController();
     q2Answer4Controller = TextEditingController();
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance?.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -135,7 +135,7 @@ class _CreateQuizQ2WidgetState extends State<CreateQuizQ2Widget> {
                               ),
                         ),
                         Text(
-                          widget.recIssue.ballotID,
+                          widget.recIssue!.ballotID!,
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
@@ -146,7 +146,7 @@ class _CreateQuizQ2WidgetState extends State<CreateQuizQ2Widget> {
                               ),
                         ),
                         Text(
-                          widget.recIssue.title,
+                          widget.recIssue!.title!,
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
@@ -645,19 +645,19 @@ class _CreateQuizQ2WidgetState extends State<CreateQuizQ2Widget> {
                   onPressed: () async {
                     final quizzesUpdateData = {
                       ...createQuizzesRecordData(
-                        q2Correct: q2CorrectAnswerController.text,
-                        question2: question2Controller.text,
+                        q2Correct: q2CorrectAnswerController!.text,
+                        question2: question2Controller!.text,
                         q2correctAnswerIndex: correctAnswerIndexValue,
                       ),
                       'q2Answers': functions.quizAnswersasStringList2(
-                          q2Answer1Controller.text,
-                          q2Answer2Controller.text,
-                          q2Answer3Controller.text,
-                          q2Answer4Controller.text,
-                          q2CorrectAnswerController.text,
+                          q2Answer1Controller!.text,
+                          q2Answer2Controller!.text,
+                          q2Answer3Controller!.text,
+                          q2Answer4Controller!.text,
+                          q2CorrectAnswerController!.text,
                           correctAnswerIndexValue),
                     };
-                    await widget.recQuiz.reference.update(quizzesUpdateData);
+                    await widget.recQuiz!.reference.update(quizzesUpdateData);
                     await Navigator.push(
                       context,
                       MaterialPageRoute(

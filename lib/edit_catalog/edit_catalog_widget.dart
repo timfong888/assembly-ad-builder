@@ -17,25 +17,25 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditCatalogWidget extends StatefulWidget {
   const EditCatalogWidget({
-    Key key,
+    Key? key,
     this.recordAd,
     this.recordIssue,
     this.recCatalog,
   }) : super(key: key);
 
-  final AdsRecord recordAd;
-  final IssuesRecord recordIssue;
-  final CatalogRecord recCatalog;
+  final AdsRecord? recordAd;
+  final IssuesRecord? recordIssue;
+  final CatalogRecord? recCatalog;
 
   @override
   _EditCatalogWidgetState createState() => _EditCatalogWidgetState();
 }
 
 class _EditCatalogWidgetState extends State<EditCatalogWidget> {
-  DateTime datePicked;
-  TextEditingController endDateFieldController;
-  TextEditingController summaryFieldController;
-  TextEditingController titleFieldController;
+  DateTime? datePicked;
+  TextEditingController? endDateFieldController;
+  TextEditingController? summaryFieldController;
+  TextEditingController? titleFieldController;
   String uploadedFileUrl = '';
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -46,14 +46,15 @@ class _EditCatalogWidgetState extends State<EditCatalogWidget> {
     endDateFieldController =
         TextEditingController(text: dateTimeFormat('MMMMEEEEd', datePicked));
     summaryFieldController =
-        TextEditingController(text: widget.recCatalog.summary);
-    titleFieldController = TextEditingController(text: widget.recCatalog.title);
+        TextEditingController(text: widget.recCatalog!.summary);
+    titleFieldController =
+        TextEditingController(text: widget.recCatalog!.title);
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<CatalogRecord>(
-      stream: CatalogRecord.getDocument(widget.recCatalog.reference),
+      stream: CatalogRecord.getDocument(widget.recCatalog!.reference),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -67,7 +68,7 @@ class _EditCatalogWidgetState extends State<EditCatalogWidget> {
             ),
           );
         }
-        final editCatalogCatalogRecord = snapshot.data;
+        final editCatalogCatalogRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -119,7 +120,7 @@ class _EditCatalogWidgetState extends State<EditCatalogWidget> {
                                   ),
                             ),
                             Text(
-                              widget.recCatalog.title,
+                              widget.recCatalog!.title!,
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
@@ -340,7 +341,7 @@ class _EditCatalogWidgetState extends State<EditCatalogWidget> {
                                                 topRight: Radius.circular(4.0),
                                               ),
                                             ),
-                                            suffixIcon: summaryFieldController
+                                            suffixIcon: summaryFieldController!
                                                     .text.isNotEmpty
                                                 ? InkWell(
                                                     onTap: () => setState(
@@ -495,7 +496,8 @@ class _EditCatalogWidgetState extends State<EditCatalogWidget> {
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Image.network(
-                                              editCatalogCatalogRecord.logoUrl,
+                                              editCatalogCatalogRecord!
+                                                  .logoUrl!,
                                               width: 100,
                                               height: 100,
                                               fit: BoxFit.cover,
@@ -524,6 +526,7 @@ class _EditCatalogWidgetState extends State<EditCatalogWidget> {
                                                                       m.storagePath,
                                                                       m.bytes))))
                                                       .where((u) => u != null)
+                                                      .map((u) => u!)
                                                       .toList();
                                                   ScaffoldMessenger.of(context)
                                                       .hideCurrentSnackBar();
@@ -571,7 +574,7 @@ class _EditCatalogWidgetState extends State<EditCatalogWidget> {
                                             ),
                                             Text(
                                               functions.logoUrlToString(
-                                                  editCatalogCatalogRecord
+                                                  editCatalogCatalogRecord!
                                                       .logoUrl),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -608,31 +611,27 @@ class _EditCatalogWidgetState extends State<EditCatalogWidget> {
                                             }
                                             List<IssuesRecord>
                                                 buttonIssuesRecordList =
-                                                snapshot.data;
+                                                snapshot.data!;
                                             // Return an empty Container when the document does not exist.
-                                            if (snapshot.data.isEmpty) {
+                                            if (snapshot.data!.isEmpty) {
                                               return Container();
                                             }
                                             final buttonIssuesRecord =
-                                                buttonIssuesRecordList
-                                                        .isNotEmpty
-                                                    ? buttonIssuesRecordList
-                                                        .first
-                                                    : null;
+                                                buttonIssuesRecordList.first;
                                             return FFButtonWidget(
                                               onPressed: () async {
                                                 final catalogUpdateData =
                                                     createCatalogRecordData(
-                                                  title:
-                                                      titleFieldController.text,
+                                                  title: titleFieldController!
+                                                      .text,
                                                   summary:
-                                                      summaryFieldController
+                                                      summaryFieldController!
                                                           .text,
-                                                  endDate:
-                                                      widget.recCatalog.endDate,
+                                                  endDate: widget
+                                                      .recCatalog!.endDate,
                                                   logoUrl: uploadedFileUrl,
                                                 );
-                                                await editCatalogCatalogRecord
+                                                await editCatalogCatalogRecord!
                                                     .reference
                                                     .update(catalogUpdateData);
                                                 await Navigator.push(

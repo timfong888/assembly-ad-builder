@@ -16,7 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditQuiz2Widget extends StatefulWidget {
   const EditQuiz2Widget({
-    Key key,
+    Key? key,
     this.recordAd,
     this.refIssue,
     this.recIssue,
@@ -24,38 +24,38 @@ class EditQuiz2Widget extends StatefulWidget {
     this.recCatalog,
   }) : super(key: key);
 
-  final AdsRecord recordAd;
-  final DocumentReference refIssue;
-  final IssuesRecord recIssue;
-  final QuizzesRecord recQuiz;
-  final CatalogRecord recCatalog;
+  final AdsRecord? recordAd;
+  final DocumentReference? refIssue;
+  final IssuesRecord? recIssue;
+  final QuizzesRecord? recQuiz;
+  final CatalogRecord? recCatalog;
 
   @override
   _EditQuiz2WidgetState createState() => _EditQuiz2WidgetState();
 }
 
 class _EditQuiz2WidgetState extends State<EditQuiz2Widget> {
-  TextEditingController q2Answer1Controller;
-  TextEditingController q2CorrectAnswerController;
-  double correctAnswerIndexValue;
-  TextEditingController question2Controller;
-  TextEditingController q2Answer2Controller;
-  TextEditingController q2Answer3Controller;
-  TextEditingController q2Answer4Controller;
+  TextEditingController? q2Answer1Controller;
+  TextEditingController? q2CorrectAnswerController;
+  double? correctAnswerIndexValue;
+  TextEditingController? question2Controller;
+  TextEditingController? q2Answer2Controller;
+  TextEditingController? q2Answer3Controller;
+  TextEditingController? q2Answer4Controller;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
     q2CorrectAnswerController =
-        TextEditingController(text: widget.recQuiz.q2Correct);
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+        TextEditingController(text: widget.recQuiz!.q2Correct);
+    WidgetsBinding.instance?.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuizzesRecord>(
-      stream: QuizzesRecord.getDocument(widget.recQuiz.reference),
+      stream: QuizzesRecord.getDocument(widget.recQuiz!.reference),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -69,7 +69,7 @@ class _EditQuiz2WidgetState extends State<EditQuiz2Widget> {
             ),
           );
         }
-        final editQuiz2QuizzesRecord = snapshot.data;
+        final editQuiz2QuizzesRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -147,7 +147,7 @@ class _EditQuiz2WidgetState extends State<EditQuiz2Widget> {
                                     ),
                           ),
                           Text(
-                            widget.recIssue.ballotID,
+                            widget.recIssue!.ballotID!,
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
@@ -157,7 +157,7 @@ class _EditQuiz2WidgetState extends State<EditQuiz2Widget> {
                                     ),
                           ),
                           Text(
-                            widget.recIssue.title,
+                            widget.recIssue!.title!,
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
@@ -372,8 +372,8 @@ class _EditQuiz2WidgetState extends State<EditQuiz2Widget> {
                                   min: 1,
                                   max: 5,
                                   value: correctAnswerIndexValue ??=
-                                      editQuiz2QuizzesRecord
-                                          .q2correctAnswerIndex,
+                                      editQuiz2QuizzesRecord!
+                                          .q2correctAnswerIndex!,
                                   label: correctAnswerIndexValue.toString(),
                                   divisions: 4,
                                   onChanged: (newValue) {
@@ -410,7 +410,7 @@ class _EditQuiz2WidgetState extends State<EditQuiz2Widget> {
                             child: TextFormField(
                               controller: question2Controller ??=
                                   TextEditingController(
-                                text: editQuiz2QuizzesRecord.question2,
+                                text: editQuiz2QuizzesRecord!.question2,
                               ),
                               onChanged: (_) => EasyDebounce.debounce(
                                 'question2Controller',
@@ -704,7 +704,7 @@ class _EditQuiz2WidgetState extends State<EditQuiz2Widget> {
                         onPressed: () async {
                           final quizzesUpdateData = {
                             ...createQuizzesRecordData(
-                              q2Correct: q2CorrectAnswerController.text,
+                              q2Correct: q2CorrectAnswerController!.text,
                               question2: question2Controller?.text ?? '',
                               q2correctAnswerIndex: correctAnswerIndexValue,
                             ),
@@ -714,7 +714,7 @@ class _EditQuiz2WidgetState extends State<EditQuiz2Widget> {
                                 q2Answer3Controller?.text ?? '',
                                 q2Answer4Controller?.text ?? ''),
                           };
-                          await editQuiz2QuizzesRecord.reference
+                          await editQuiz2QuizzesRecord!.reference
                               .update(quizzesUpdateData);
                           await Navigator.push(
                             context,

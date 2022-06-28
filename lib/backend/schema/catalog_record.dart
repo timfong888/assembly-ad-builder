@@ -10,27 +10,21 @@ abstract class CatalogRecord
     implements Built<CatalogRecord, CatalogRecordBuilder> {
   static Serializer<CatalogRecord> get serializer => _$catalogRecordSerializer;
 
-  @nullable
-  String get title;
+  String? get title;
 
-  @nullable
-  String get summary;
+  String? get summary;
 
-  @nullable
-  DateTime get endDate;
+  DateTime? get endDate;
 
-  @nullable
-  String get logoUrl;
+  String? get logoUrl;
 
-  @nullable
-  bool get active;
+  bool? get active;
 
-  @nullable
-  DateTime get modifiedDate;
+  DateTime? get modifiedDate;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ref;
+  DocumentReference get reference => ref!;
 
   static void _initializeBuilder(CatalogRecordBuilder builder) => builder
     ..title = ''
@@ -43,11 +37,11 @@ abstract class CatalogRecord
 
   static Stream<CatalogRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<CatalogRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   CatalogRecord._();
   factory CatalogRecord([void Function(CatalogRecordBuilder) updates]) =
@@ -56,16 +50,16 @@ abstract class CatalogRecord
   static CatalogRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createCatalogRecordData({
-  String title,
-  String summary,
-  DateTime endDate,
-  String logoUrl,
-  bool active,
-  DateTime modifiedDate,
+  String? title,
+  String? summary,
+  DateTime? endDate,
+  String? logoUrl,
+  bool? active,
+  DateTime? modifiedDate,
 }) =>
     serializers.toFirestore(
         CatalogRecord.serializer,

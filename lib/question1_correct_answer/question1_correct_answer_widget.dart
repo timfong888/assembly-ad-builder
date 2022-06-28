@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Question1CorrectAnswerWidget extends StatefulWidget {
-  const Question1CorrectAnswerWidget({Key key}) : super(key: key);
+  const Question1CorrectAnswerWidget({Key? key}) : super(key: key);
 
   @override
   _Question1CorrectAnswerWidgetState createState() =>

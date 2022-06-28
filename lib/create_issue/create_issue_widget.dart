@@ -15,25 +15,25 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CreateIssueWidget extends StatefulWidget {
   const CreateIssueWidget({
-    Key key,
+    Key? key,
     this.recCatalog,
     this.refCatalog,
   }) : super(key: key);
 
-  final CatalogRecord recCatalog;
-  final DocumentReference refCatalog;
+  final CatalogRecord? recCatalog;
+  final DocumentReference? refCatalog;
 
   @override
   _CreateIssueWidgetState createState() => _CreateIssueWidgetState();
 }
 
 class _CreateIssueWidgetState extends State<CreateIssueWidget> {
-  DateTime datePicked;
-  TextEditingController endDateFieldController;
-  TextEditingController ballotIDFieldController;
-  TextEditingController titleController;
-  TextEditingController summaryFieldController;
-  IssuesRecord recIssue;
+  DateTime? datePicked;
+  TextEditingController? endDateFieldController;
+  TextEditingController? ballotIDFieldController;
+  TextEditingController? titleController;
+  TextEditingController? summaryFieldController;
+  IssuesRecord? recIssue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -93,7 +93,7 @@ class _CreateIssueWidgetState extends State<CreateIssueWidget> {
                             ),
                       ),
                       Text(
-                        widget.recCatalog.title,
+                        widget.recCatalog!.title!,
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Poppins',
                               color:
@@ -491,11 +491,11 @@ class _CreateIssueWidgetState extends State<CreateIssueWidget> {
                                 onPressed: () async {
                                   final issuesCreateData =
                                       createIssuesRecordData(
-                                    title: titleController.text,
-                                    summary: summaryFieldController.text,
-                                    state: endDateFieldController.text,
-                                    ballotID: ballotIDFieldController.text,
-                                    refCatalog: widget.recCatalog.reference,
+                                    title: titleController!.text,
+                                    summary: summaryFieldController!.text,
+                                    state: endDateFieldController!.text,
+                                    ballotID: ballotIDFieldController!.text,
+                                    refCatalog: widget.recCatalog!.reference,
                                   );
                                   var issuesRecordReference =
                                       IssuesRecord.collection.doc();

@@ -13,17 +13,17 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CreateAdWidget extends StatefulWidget {
   const CreateAdWidget({
-    Key key,
+    Key? key,
     this.recCatalog,
     this.recIssue,
     this.recQuiz,
     this.recAd,
   }) : super(key: key);
 
-  final CatalogRecord recCatalog;
-  final IssuesRecord recIssue;
-  final QuizzesRecord recQuiz;
-  final AdsRecord recAd;
+  final CatalogRecord? recCatalog;
+  final IssuesRecord? recIssue;
+  final QuizzesRecord? recQuiz;
+  final AdsRecord? recAd;
 
   @override
   _CreateAdWidgetState createState() => _CreateAdWidgetState();
@@ -178,7 +178,7 @@ class _CreateAdWidgetState extends State<CreateAdWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          widget.recIssue.ballotID,
+                          widget.recIssue!.ballotID!,
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
@@ -189,7 +189,7 @@ class _CreateAdWidgetState extends State<CreateAdWidget> {
                               ),
                         ),
                         Text(
-                          widget.recIssue.title,
+                          widget.recIssue!.title!,
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
