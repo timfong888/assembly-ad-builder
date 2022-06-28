@@ -327,7 +327,6 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                                           1,
                                                           displayFullAdQuizzesRecord!
                                                               .q1Answers!
-                                                              .toList()!
                                                               .toList())
                                                       .toList(),
                                                   onChanged: (value) {
@@ -386,7 +385,6 @@ class _DisplayFullAdWidgetState extends State<DisplayFullAdWidget> {
                                                           2,
                                                           displayFullAdQuizzesRecord!
                                                               .q2Answers!
-                                                              .toList()!
                                                               .toList())
                                                       .toList(),
                                                   onChanged: (value) {
