@@ -6,9 +6,10 @@ export 'list_issues/list_issues_widget.dart' show ListIssuesWidget;
 export 'create_issue/create_issue_widget.dart' show CreateIssueWidget;
 export 'edit_issue/edit_issue_widget.dart' show EditIssueWidget;
 export 'listof_ads/listof_ads_widget.dart' show ListofAdsWidget;
+export 'create_ad/create_ad_widget.dart' show CreateAdWidget;
 export 'create_quiz/create_quiz_widget.dart' show CreateQuizWidget;
 export 'create_quiz_q2/create_quiz_q2_widget.dart' show CreateQuizQ2Widget;
-export 'create_ad/create_ad_widget.dart' show CreateAdWidget;
+export 'create_argument/create_argument_widget.dart' show CreateArgumentWidget;
 export 'edit_ad/edit_ad_widget.dart' show EditAdWidget;
 export 'question1_correct_answer/question1_correct_answer_widget.dart'
     show Question1CorrectAnswerWidget;

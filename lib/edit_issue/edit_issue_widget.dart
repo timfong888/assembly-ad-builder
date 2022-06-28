@@ -84,10 +84,18 @@ class _EditIssueWidgetState extends State<EditIssueWidget> {
                         ),
                       ),
                       Text(
-                        '>  Catalog',
+                        '>  Catalog ',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Poppins',
                               color: Color(0xFFFDFCDC),
+                            ),
+                      ),
+                      Text(
+                        widget.recCatalog.title,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color: FlutterFlowTheme.of(context).lineColor,
+                              fontWeight: FontWeight.normal,
                             ),
                       ),
                       InkWell(
@@ -102,7 +110,7 @@ class _EditIssueWidgetState extends State<EditIssueWidget> {
                           );
                         },
                         child: Text(
-                          ' > List Issues',
+                          ' >   List Issues',
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'Poppins',
@@ -131,22 +139,6 @@ class _EditIssueWidgetState extends State<EditIssueWidget> {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Your Catalog:  ',
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                              Text(
-                                widget.recCatalog.title,
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                            ],
-                          ),
-                        ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [

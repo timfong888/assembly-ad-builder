@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../list_catalog/list_catalog_widget.dart';
 import '../list_issues/list_issues_widget.dart';
+import '../login/login_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -91,6 +92,15 @@ class _CreateIssueWidgetState extends State<CreateIssueWidget> {
                               color: Color(0xFFFDFCDC),
                             ),
                       ),
+                      Text(
+                        widget.recCatalog.title,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color:
+                                  FlutterFlowTheme.of(context).primaryBtnText,
+                              fontWeight: FontWeight.normal,
+                            ),
+                      ),
                       InkWell(
                         onTap: () async {
                           await Navigator.push(
@@ -112,12 +122,60 @@ class _CreateIssueWidgetState extends State<CreateIssueWidget> {
                         ),
                       ),
                       Text(
-                        '> Create Issue',
+                        '> Create Issue > ',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Poppins',
                               color:
                                   FlutterFlowTheme.of(context).primaryBtnText,
                             ),
+                      ),
+                      Text(
+                        'Create Ads  >     Create Quiz >     Create Argument >',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color: FlutterFlowTheme.of(context).lineColor,
+                              fontWeight: FontWeight.w300,
+                            ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(250, 0, 0, 0),
+                        child: InkWell(
+                          onTap: () async {
+                            await launchURL(
+                                'https://docs.assembly.digital/how-to-build-your-ads');
+                          },
+                          child: Text(
+                            'Help Docs',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          await signOut();
+                          await Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginWidget(),
+                            ),
+                            (r) => false,
+                          );
+                        },
+                        child: Text(
+                          'Logout',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).lineColor,
+                              ),
+                        ),
                       ),
                     ],
                   ),
@@ -132,22 +190,6 @@ class _CreateIssueWidgetState extends State<CreateIssueWidget> {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Your Catalog:  ',
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                              Text(
-                                widget.recCatalog.title,
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                            ],
-                          ),
-                        ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -442,48 +484,53 @@ class _CreateIssueWidgetState extends State<CreateIssueWidget> {
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            FFButtonWidget(
-                              onPressed: () async {
-                                final issuesCreateData = createIssuesRecordData(
-                                  title: titleController.text,
-                                  summary: summaryFieldController.text,
-                                  state: endDateFieldController.text,
-                                  ballotID: ballotIDFieldController.text,
-                                  refCatalog: widget.recCatalog.reference,
-                                );
-                                var issuesRecordReference =
-                                    IssuesRecord.collection.doc();
-                                await issuesRecordReference
-                                    .set(issuesCreateData);
-                                recIssue = IssuesRecord.getDocumentFromData(
-                                    issuesCreateData, issuesRecordReference);
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ListIssuesWidget(
-                                      recCatalog: widget.recCatalog,
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(50, 0, 0, 0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  final issuesCreateData =
+                                      createIssuesRecordData(
+                                    title: titleController.text,
+                                    summary: summaryFieldController.text,
+                                    state: endDateFieldController.text,
+                                    ballotID: ballotIDFieldController.text,
+                                    refCatalog: widget.recCatalog.reference,
+                                  );
+                                  var issuesRecordReference =
+                                      IssuesRecord.collection.doc();
+                                  await issuesRecordReference
+                                      .set(issuesCreateData);
+                                  recIssue = IssuesRecord.getDocumentFromData(
+                                      issuesCreateData, issuesRecordReference);
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ListIssuesWidget(
+                                        recCatalog: widget.recCatalog,
+                                      ),
                                     ),
-                                  ),
-                                );
+                                  );
 
-                                setState(() {});
-                              },
-                              text: 'Create Issue',
-                              options: FFButtonOptions(
-                                width: 130,
-                                height: 40,
-                                color: Color(0xFFFF9D2E),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                    ),
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
+                                  setState(() {});
+                                },
+                                text: 'Create Issue',
+                                options: FFButtonOptions(
+                                  width: 130,
+                                  height: 40,
+                                  color: Color(0xFFFF9D2E),
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                      ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: 12,
                                 ),
-                                borderRadius: 12,
                               ),
                             ),
                           ],

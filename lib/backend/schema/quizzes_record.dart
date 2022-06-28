@@ -29,6 +29,12 @@ abstract class QuizzesRecord
   String get question2;
 
   @nullable
+  double get q1correctAnswerIndex;
+
+  @nullable
+  double get q2correctAnswerIndex;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -38,7 +44,9 @@ abstract class QuizzesRecord
     ..q1Correct = ''
     ..q2Correct = ''
     ..question1 = ''
-    ..question2 = '';
+    ..question2 = ''
+    ..q1correctAnswerIndex = 0.0
+    ..q2correctAnswerIndex = 0.0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('quizzes');
@@ -66,6 +74,8 @@ Map<String, dynamic> createQuizzesRecordData({
   String q2Correct,
   String question1,
   String question2,
+  double q1correctAnswerIndex,
+  double q2correctAnswerIndex,
 }) =>
     serializers.toFirestore(
         QuizzesRecord.serializer,
@@ -75,4 +85,6 @@ Map<String, dynamic> createQuizzesRecordData({
           ..q1Correct = q1Correct
           ..q2Correct = q2Correct
           ..question1 = question1
-          ..question2 = question2));
+          ..question2 = question2
+          ..q1correctAnswerIndex = q1correctAnswerIndex
+          ..q2correctAnswerIndex = q2correctAnswerIndex));

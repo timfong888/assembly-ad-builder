@@ -31,6 +31,9 @@ abstract class AdsRecord implements Built<AdsRecord, AdsRecordBuilder> {
   String get adRecordID;
 
   @nullable
+  bool get boolActive;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -39,7 +42,8 @@ abstract class AdsRecord implements Built<AdsRecord, AdsRecordBuilder> {
     ..summary = ''
     ..learnTokens = 0
     ..argument = ''
-    ..adRecordID = '';
+    ..adRecordID = ''
+    ..boolActive = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('ads');
@@ -69,6 +73,7 @@ Map<String, dynamic> createAdsRecordData({
   String argument,
   DocumentReference refQuiz,
   String adRecordID,
+  bool boolActive,
 }) =>
     serializers.toFirestore(
         AdsRecord.serializer,
@@ -79,4 +84,5 @@ Map<String, dynamic> createAdsRecordData({
           ..learnTokens = learnTokens
           ..argument = argument
           ..refQuiz = refQuiz
-          ..adRecordID = adRecordID));
+          ..adRecordID = adRecordID
+          ..boolActive = boolActive));

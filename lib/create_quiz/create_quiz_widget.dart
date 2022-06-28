@@ -36,6 +36,7 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
   QuizzesRecord recNewQuiz;
   TextEditingController q1Answer1Controller;
   TextEditingController q1CorrectAnswerController;
+  double correctAnswerIndexValue;
   TextEditingController question1Controller;
   TextEditingController q1Answer2Controller;
   TextEditingController q1Answer3Controller;
@@ -51,6 +52,7 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
     q1Answer2Controller = TextEditingController();
     q1Answer3Controller = TextEditingController();
     q1Answer4Controller = TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -69,144 +71,65 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                 decoration: BoxDecoration(
                   color: Color(0xFF0081A7),
                 ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ListCatalogWidget(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'Catalog Lists',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ListCatalogWidget(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'Catalog Lists',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
                                     fontFamily: 'Poppins',
                                     color: Color(0xFFFDFCDC),
                                   ),
-                        ),
-                      ),
-                      Text(
-                        '>  Catalog',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              color: Color(0xFFFDFCDC),
                             ),
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ListIssuesWidget(
-                                recCatalog: widget.recCatalog,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          '> List Issues >',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
+                          ),
+                          Text(
+                            '>  Catalog',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: Color(0xFFFDFCDC),
+                                    ),
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ListIssuesWidget(
+                                    recCatalog: widget.recCatalog,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              '> List Issues >',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
                                     fontFamily: 'Poppins',
                                     color: Color(0xFFFDFCDC),
                                   ),
-                        ),
-                      ),
-                      Text(
-                        '     Issue',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              color:
-                                  FlutterFlowTheme.of(context).primaryBtnText,
                             ),
-                      ),
-                      Text(
-                        widget.recIssue.ballotID,
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              color:
-                                  FlutterFlowTheme.of(context).primaryBtnText,
-                              fontWeight: FontWeight.w500,
-                            ),
-                      ),
-                      Text(
-                        widget.recIssue.title,
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              color:
-                                  FlutterFlowTheme.of(context).primaryBtnText,
-                              fontWeight: FontWeight.w500,
-                            ),
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ListofAdsWidget(
-                                recIssue: widget.recIssue,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          '>       List of Ads >',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
-                              ),
-                        ),
-                      ),
-                      Text(
-                        '   Create Ad >',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              color:
-                                  FlutterFlowTheme.of(context).primaryBtnText,
-                            ),
-                      ),
-                      Text(
-                        '>   Create Quiz >',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              color:
-                                  FlutterFlowTheme.of(context).primaryBtnText,
-                            ),
-                      ),
-                      Text(
-                        '     ....Create Argument',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              color: Color(0xFFCBEEF6),
-                              fontWeight: FontWeight.w300,
-                              fontStyle: FontStyle.italic,
-                            ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(200, 0, 0, 0),
-                        child: InkWell(
-                          onTap: () async {
-                            await signOut();
-                            await Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginWidget(),
-                              ),
-                              (r) => false,
-                            );
-                          },
-                          child: Text(
-                            'Logout',
+                          ),
+                          Text(
+                            '     Issue >',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
@@ -214,10 +137,115 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                                           .primaryBtnText,
                                     ),
                           ),
-                        ),
+                          InkWell(
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ListofAdsWidget(
+                                    recIssue: widget.recIssue,
+                                    recCatalog: widget.recCatalog,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              '      List of Ads >',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBtnText,
+                                  ),
+                            ),
+                          ),
+                          Text(
+                            '   Create Ad >',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                    ),
+                          ),
+                          Text(
+                            '>   Create Quiz  Question 1>',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                    ),
+                          ),
+                          Text(
+                            '     ....Create Argument',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: Color(0xFFCBEEF6),
+                                      fontWeight: FontWeight.w300,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(200, 0, 0, 0),
+                            child: InkWell(
+                              onTap: () async {
+                                await signOut();
+                                await Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginWidget(),
+                                  ),
+                                  (r) => false,
+                                );
+                              },
+                              child: Text(
+                                'Logout',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                    ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            widget.recIssue.ballotID,
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                          ),
+                          Text(
+                            widget.recIssue.title,
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Column(
@@ -294,6 +322,54 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                         ),
                       ],
                     ),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Container(
+                        width: 250,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFEEEEEE),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Index for Correct Answer (1...5)',
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: 100,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFEEEEEE),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Slider(
+                              activeColor:
+                                  FlutterFlowTheme.of(context).tertiaryColor,
+                              inactiveColor: Color(0xFF9E9E9E),
+                              min: 1,
+                              max: 5,
+                              value: correctAnswerIndexValue ??= 1,
+                              label: correctAnswerIndexValue.toString(),
+                              divisions: 4,
+                              onChanged: (newValue) {
+                                setState(
+                                    () => correctAnswerIndexValue = newValue);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -606,12 +682,15 @@ class _CreateQuizWidgetState extends State<CreateQuizWidget> {
                         ...createQuizzesRecordData(
                           q1Correct: q1CorrectAnswerController.text,
                           question1: question1Controller.text,
+                          q1correctAnswerIndex: correctAnswerIndexValue,
                         ),
-                        'q1Answers': functions.quizAnswersasStringList(
+                        'q1Answers': functions.quizAnswersasStringList2(
                             q1Answer1Controller.text,
                             q1Answer2Controller.text,
                             q1Answer3Controller.text,
-                            q1Answer4Controller.text),
+                            q1Answer4Controller.text,
+                            q1CorrectAnswerController.text,
+                            correctAnswerIndexValue),
                       };
                       var quizzesRecordReference =
                           QuizzesRecord.collection.doc();

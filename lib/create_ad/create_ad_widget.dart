@@ -6,45 +6,31 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../list_catalog/list_catalog_widget.dart';
 import '../list_issues/list_issues_widget.dart';
 import '../listof_ads/listof_ads_widget.dart';
-import '../flutter_flow/random_data_util.dart' as random_data;
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_debounce/easy_debounce.dart';
+import '../login/login_widget.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CreateAdWidget extends StatefulWidget {
   const CreateAdWidget({
     Key key,
-    this.recordIssue,
-    this.recQuiz,
     this.recCatalog,
+    this.recIssue,
+    this.recQuiz,
+    this.recAd,
   }) : super(key: key);
 
-  final IssuesRecord recordIssue;
-  final QuizzesRecord recQuiz;
   final CatalogRecord recCatalog;
+  final IssuesRecord recIssue;
+  final QuizzesRecord recQuiz;
+  final AdsRecord recAd;
 
   @override
   _CreateAdWidgetState createState() => _CreateAdWidgetState();
 }
 
 class _CreateAdWidgetState extends State<CreateAdWidget> {
-  AdsRecord recNewAd;
-  TextEditingController argumentController;
-  TextEditingController headlineController;
-  TextEditingController summaryFieldController;
-  TextEditingController learnTokensController;
-  final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    argumentController = TextEditingController();
-    headlineController = TextEditingController();
-    summaryFieldController = TextEditingController();
-    learnTokensController = TextEditingController();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,111 +40,73 @@ class _CreateAdWidgetState extends State<CreateAdWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF0081A7),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        InkWell(
-                          onTap: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ListCatalogWidget(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            'Catalog Lists',
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Poppins',
-                                      color: Color(0xFFFDFCDC),
-                                    ),
-                          ),
-                        ),
-                        Text(
-                          '>  Catalog',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Color(0xFF0081A7),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ListCatalogWidget(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'Catalog Lists',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
                                     fontFamily: 'Poppins',
                                     color: Color(0xFFFDFCDC),
                                   ),
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ListIssuesWidget(
-                                  recCatalog: widget.recCatalog,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            '> List Issues',
+                            ),
+                          ),
+                          Text(
+                            '>  Catalog',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
                                       color: Color(0xFFFDFCDC),
                                     ),
                           ),
-                        ),
-                        Text(
-                          '   > Issue',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
-                              ),
-                        ),
-                        Text(
-                          widget.recordIssue.ballotID,
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
-                                fontWeight: FontWeight.normal,
-                              ),
-                        ),
-                        Text(
-                          widget.recordIssue.title,
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
-                                fontWeight: FontWeight.normal,
-                              ),
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CreateAdWidget(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            ' >   Create Ad >',
+                          InkWell(
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ListIssuesWidget(
+                                    recCatalog: widget.recCatalog,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              '> List Issues >',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: Color(0xFFFDFCDC),
+                                  ),
+                            ),
+                          ),
+                          Text(
+                            '     Issue',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
@@ -166,476 +114,199 @@ class _CreateAdWidgetState extends State<CreateAdWidget> {
                                           .primaryBtnText,
                                     ),
                           ),
-                        ),
-                        Text(
-                          '     Quiz >',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
-                                fontWeight: FontWeight.normal,
-                                fontStyle: FontStyle.italic,
-                              ),
-                        ),
-                        Text(
-                          '   Create Argument',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
-                                fontWeight: FontWeight.w600,
-                              ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFFEEEEEE),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.7,
-                              height: MediaQuery.of(context).size.height * 1,
-                              decoration: BoxDecoration(),
-                              child: Form(
-                                key: formKey,
-                                autovalidateMode: AutovalidateMode.disabled,
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 15),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 50, 0),
-                                              child: Container(
-                                                width: 100,
-                                                height: 100,
-                                                decoration: BoxDecoration(),
-                                                child: Text(
-                                                  'Headline',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1,
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.7,
-                                              height: 100,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Color(0xFF0081A7),
-                                                ),
-                                              ),
-                                              child: TextFormField(
-                                                controller: headlineController,
-                                                autofocus: true,
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  hintText:
-                                                      '[Some hint text...]',
-                                                  enabledBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Color(0x00000000),
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(4.0),
-                                                      topRight:
-                                                          Radius.circular(4.0),
-                                                    ),
-                                                  ),
-                                                  focusedBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Color(0x00000000),
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(4.0),
-                                                      topRight:
-                                                          Radius.circular(4.0),
-                                                    ),
-                                                  ),
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                        ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 15),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 50, 0),
-                                              child: Container(
-                                                width: 100,
-                                                height: 100,
-                                                decoration: BoxDecoration(),
-                                                child: Text(
-                                                  'Summary',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1,
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.7,
-                                              height: 100,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Color(0xFF0081A7),
-                                                ),
-                                              ),
-                                              child: TextFormField(
-                                                controller:
-                                                    summaryFieldController,
-                                                autofocus: true,
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  hintText:
-                                                      '[Some hint text...]',
-                                                  enabledBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Color(0x00000000),
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(4.0),
-                                                      topRight:
-                                                          Radius.circular(4.0),
-                                                    ),
-                                                  ),
-                                                  focusedBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Color(0x00000000),
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(4.0),
-                                                      topRight:
-                                                          Radius.circular(4.0),
-                                                    ),
-                                                  ),
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                        ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 50, 0),
-                                            child: Container(
-                                              width: 100,
-                                              height: 300,
-                                              decoration: BoxDecoration(),
-                                              child: Text(
-                                                'Argument\n',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.7,
-                                            height: 300,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: Color(0xFF0081A7),
-                                              ),
-                                            ),
-                                            child: TextFormField(
-                                              controller: argumentController,
-                                              autofocus: true,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                hintText:
-                                                    'Write your argument here....',
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
-                                                ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
-                                                ),
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                              textAlign: TextAlign.start,
-                                              maxLines: 10,
-                                              keyboardType:
-                                                  TextInputType.multiline,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 50, 0),
-                                            child: Container(
-                                              width: 100,
-                                              height: 100,
-                                              decoration: BoxDecoration(),
-                                              child: Text(
-                                                'Tokens',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.7,
-                                            height: 30,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: Color(0xFF0081A7),
-                                              ),
-                                            ),
-                                            child: TextFormField(
-                                              controller: learnTokensController,
-                                              onChanged: (_) =>
-                                                  EasyDebounce.debounce(
-                                                'learnTokensController',
-                                                Duration(milliseconds: 2000),
-                                                () => setState(() {}),
-                                              ),
-                                              autofocus: true,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                hintText: '[Some hint text...]',
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
-                                                ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
-                                                ),
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                              keyboardType:
-                                                  TextInputType.number,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          FFButtonWidget(
-                                            onPressed: () async {
-                                              // Create adRecord
-
-                                              final adsCreateData =
-                                                  createAdsRecordData(
-                                                headline:
-                                                    headlineController.text,
-                                                argument:
-                                                    argumentController.text,
-                                                learnTokens: int.parse(
-                                                    learnTokensController.text),
-                                                refQuiz:
-                                                    widget.recQuiz.reference,
-                                                issueID: widget
-                                                    .recordIssue.reference,
-                                                summary:
-                                                    summaryFieldController.text,
-                                                adRecordID:
-                                                    random_data.randomString(
-                                                  10,
-                                                  15,
-                                                  true,
-                                                  true,
-                                                  true,
-                                                ),
-                                              );
-                                              var adsRecordReference =
-                                                  AdsRecord.collection.doc();
-                                              await adsRecordReference
-                                                  .set(adsCreateData);
-                                              recNewAd =
-                                                  AdsRecord.getDocumentFromData(
-                                                      adsCreateData,
-                                                      adsRecordReference);
-                                              // Go to CreateQuiz
-                                              await Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ListofAdsWidget(
-                                                    recIssue:
-                                                        widget.recordIssue,
-                                                  ),
-                                                ),
-                                              );
-
-                                              setState(() {});
-                                            },
-                                            text: 'Create Ad',
-                                            options: FFButtonOptions(
-                                              width: 130,
-                                              height: 40,
-                                              color: Color(0xFFFF9D2E),
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color: Colors.white,
-                                                      ),
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                                width: 1,
-                                              ),
-                                              borderRadius: 12,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                          InkWell(
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ListofAdsWidget(
+                                    recIssue: widget.recIssue,
                                   ),
                                 ),
+                              );
+                            },
+                            child: Text(
+                              '>       List of Ads >',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBtnText,
+                                  ),
+                            ),
+                          ),
+                          Text(
+                            '   Create Ad >',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                    ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(200, 0, 0, 0),
+                            child: InkWell(
+                              onTap: () async {
+                                await signOut();
+                                await Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginWidget(),
+                                  ),
+                                  (r) => false,
+                                );
+                              },
+                              child: Text(
+                                'Logout',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                    ),
                               ),
                             ),
-                          ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          widget.recIssue.ballotID,
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'Poppins',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                        Text(
+                          widget.recIssue.title,
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'Poppins',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                fontWeight: FontWeight.w500,
+                              ),
                         ),
                       ],
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.5,
+                decoration: BoxDecoration(
+                  color: Color(0xFFEEEEEE),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          'Assembly Ads consists of two parts:   a Quiz and an Argument',
+                          style: FlutterFlowTheme.of(context).bodyText1,
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          FFButtonWidget(
+                            onPressed: () {
+                              print('Button pressed ...');
+                            },
+                            text: 'Build Quiz',
+                            options: FFButtonOptions(
+                              width: 200,
+                              height: 40,
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                  ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
+                            ),
+                          ),
+                          if (functions.boolRecQuizExists(widget.recQuiz) ??
+                              true)
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
+                              child: Icon(
+                                Icons.done,
+                                color: Color(0xFF07CE07),
+                                size: 24,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          FFButtonWidget(
+                            onPressed: () {
+                              print('Button pressed ...');
+                            },
+                            text: 'Build Argument',
+                            options: FFButtonOptions(
+                              width: 200,
+                              height: 40,
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                  ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
+                            ),
+                          ),
+                          if (functions.boolRecArgExists(widget.recAd) ?? true)
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
+                              child: Icon(
+                                Icons.check,
+                                color: Color(0xFF07CE07),
+                                size: 24,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),

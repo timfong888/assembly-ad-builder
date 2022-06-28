@@ -64,6 +64,20 @@ class _$QuizzesRecordSerializer implements StructuredSerializer<QuizzesRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.q1correctAnswerIndex;
+    if (value != null) {
+      result
+        ..add('q1correctAnswerIndex')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    value = object.q2correctAnswerIndex;
+    if (value != null) {
+      result
+        ..add('q2correctAnswerIndex')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -115,6 +129,14 @@ class _$QuizzesRecordSerializer implements StructuredSerializer<QuizzesRecord> {
           result.question2 = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'q1correctAnswerIndex':
+          result.q1correctAnswerIndex = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'q2correctAnswerIndex':
+          result.q2correctAnswerIndex = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -142,6 +164,10 @@ class _$QuizzesRecord extends QuizzesRecord {
   @override
   final String question2;
   @override
+  final double q1correctAnswerIndex;
+  @override
+  final double q2correctAnswerIndex;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$QuizzesRecord([void Function(QuizzesRecordBuilder) updates]) =>
@@ -154,6 +180,8 @@ class _$QuizzesRecord extends QuizzesRecord {
       this.q2Correct,
       this.question1,
       this.question2,
+      this.q1correctAnswerIndex,
+      this.q2correctAnswerIndex,
       this.reference})
       : super._();
 
@@ -174,6 +202,8 @@ class _$QuizzesRecord extends QuizzesRecord {
         q2Correct == other.q2Correct &&
         question1 == other.question1 &&
         question2 == other.question2 &&
+        q1correctAnswerIndex == other.q1correctAnswerIndex &&
+        q2correctAnswerIndex == other.q2correctAnswerIndex &&
         reference == other.reference;
   }
 
@@ -183,11 +213,17 @@ class _$QuizzesRecord extends QuizzesRecord {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, q1Answers.hashCode), q2Answers.hashCode),
-                        q1Correct.hashCode),
-                    q2Correct.hashCode),
-                question1.hashCode),
-            question2.hashCode),
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc($jc(0, q1Answers.hashCode),
+                                    q2Answers.hashCode),
+                                q1Correct.hashCode),
+                            q2Correct.hashCode),
+                        question1.hashCode),
+                    question2.hashCode),
+                q1correctAnswerIndex.hashCode),
+            q2correctAnswerIndex.hashCode),
         reference.hashCode));
   }
 
@@ -200,6 +236,8 @@ class _$QuizzesRecord extends QuizzesRecord {
           ..add('q2Correct', q2Correct)
           ..add('question1', question1)
           ..add('question2', question2)
+          ..add('q1correctAnswerIndex', q1correctAnswerIndex)
+          ..add('q2correctAnswerIndex', q2correctAnswerIndex)
           ..add('reference', reference))
         .toString();
   }
@@ -235,6 +273,16 @@ class QuizzesRecordBuilder
   String get question2 => _$this._question2;
   set question2(String question2) => _$this._question2 = question2;
 
+  double _q1correctAnswerIndex;
+  double get q1correctAnswerIndex => _$this._q1correctAnswerIndex;
+  set q1correctAnswerIndex(double q1correctAnswerIndex) =>
+      _$this._q1correctAnswerIndex = q1correctAnswerIndex;
+
+  double _q2correctAnswerIndex;
+  double get q2correctAnswerIndex => _$this._q2correctAnswerIndex;
+  set q2correctAnswerIndex(double q2correctAnswerIndex) =>
+      _$this._q2correctAnswerIndex = q2correctAnswerIndex;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -253,6 +301,8 @@ class QuizzesRecordBuilder
       _q2Correct = $v.q2Correct;
       _question1 = $v.question1;
       _question2 = $v.question2;
+      _q1correctAnswerIndex = $v.q1correctAnswerIndex;
+      _q2correctAnswerIndex = $v.q2correctAnswerIndex;
       _reference = $v.reference;
       _$v = null;
     }
@@ -282,6 +332,8 @@ class QuizzesRecordBuilder
               q2Correct: q2Correct,
               question1: question1,
               question2: question2,
+              q1correctAnswerIndex: q1correctAnswerIndex,
+              q2correctAnswerIndex: q2correctAnswerIndex,
               reference: reference);
     } catch (_) {
       String _$failedField;

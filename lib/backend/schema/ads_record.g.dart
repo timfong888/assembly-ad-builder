@@ -69,6 +69,13 @@ class _$AdsRecordSerializer implements StructuredSerializer<AdsRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.boolActive;
+    if (value != null) {
+      result
+        ..add('boolActive')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -123,6 +130,10 @@ class _$AdsRecordSerializer implements StructuredSerializer<AdsRecord> {
           result.adRecordID = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'boolActive':
+          result.boolActive = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -152,6 +163,8 @@ class _$AdsRecord extends AdsRecord {
   @override
   final String adRecordID;
   @override
+  final bool boolActive;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$AdsRecord([void Function(AdsRecordBuilder) updates]) =>
@@ -165,6 +178,7 @@ class _$AdsRecord extends AdsRecord {
       this.argument,
       this.refQuiz,
       this.adRecordID,
+      this.boolActive,
       this.reference})
       : super._();
 
@@ -186,6 +200,7 @@ class _$AdsRecord extends AdsRecord {
         argument == other.argument &&
         refQuiz == other.refQuiz &&
         adRecordID == other.adRecordID &&
+        boolActive == other.boolActive &&
         reference == other.reference;
   }
 
@@ -196,12 +211,16 @@ class _$AdsRecord extends AdsRecord {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, headline.hashCode), summary.hashCode),
-                            issueID.hashCode),
-                        learnTokens.hashCode),
-                    argument.hashCode),
-                refQuiz.hashCode),
-            adRecordID.hashCode),
+                        $jc(
+                            $jc(
+                                $jc($jc(0, headline.hashCode),
+                                    summary.hashCode),
+                                issueID.hashCode),
+                            learnTokens.hashCode),
+                        argument.hashCode),
+                    refQuiz.hashCode),
+                adRecordID.hashCode),
+            boolActive.hashCode),
         reference.hashCode));
   }
 
@@ -215,6 +234,7 @@ class _$AdsRecord extends AdsRecord {
           ..add('argument', argument)
           ..add('refQuiz', refQuiz)
           ..add('adRecordID', adRecordID)
+          ..add('boolActive', boolActive)
           ..add('reference', reference))
         .toString();
   }
@@ -251,6 +271,10 @@ class AdsRecordBuilder implements Builder<AdsRecord, AdsRecordBuilder> {
   String get adRecordID => _$this._adRecordID;
   set adRecordID(String adRecordID) => _$this._adRecordID = adRecordID;
 
+  bool _boolActive;
+  bool get boolActive => _$this._boolActive;
+  set boolActive(bool boolActive) => _$this._boolActive = boolActive;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -270,6 +294,7 @@ class AdsRecordBuilder implements Builder<AdsRecord, AdsRecordBuilder> {
       _argument = $v.argument;
       _refQuiz = $v.refQuiz;
       _adRecordID = $v.adRecordID;
+      _boolActive = $v.boolActive;
       _reference = $v.reference;
       _$v = null;
     }
@@ -298,6 +323,7 @@ class AdsRecordBuilder implements Builder<AdsRecord, AdsRecordBuilder> {
             argument: argument,
             refQuiz: refQuiz,
             adRecordID: adRecordID,
+            boolActive: boolActive,
             reference: reference);
     replace(_$result);
     return _$result;
