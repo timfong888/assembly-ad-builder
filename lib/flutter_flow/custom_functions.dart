@@ -28,10 +28,10 @@ List<String> quizAnswersasStringList(
 
   List<String> outputQuizAnswersAsStringList = [];
 
-  outputQuizAnswersAsStringList.add(answer1!);
-  outputQuizAnswersAsStringList.add(answer2!);
-  outputQuizAnswersAsStringList.add(answer3!);
-  outputQuizAnswersAsStringList.add(answer4!);
+  outputQuizAnswersAsStringList.add(answer1);
+  outputQuizAnswersAsStringList.add(answer2);
+  outputQuizAnswersAsStringList.add(answer3);
+  outputQuizAnswersAsStringList.add(answer4);
 
   return outputQuizAnswersAsStringList;
 }
@@ -48,10 +48,10 @@ List<String> quizAnswersasStringList2(
 
   List<String> outputQuizAnswersAsStringList = [];
 
-  outputQuizAnswersAsStringList.add(answer1!);
-  outputQuizAnswersAsStringList.add(answer2!);
-  outputQuizAnswersAsStringList.add(answer3!);
-  outputQuizAnswersAsStringList.add(answer4!);
+  outputQuizAnswersAsStringList.add(answer1);
+  outputQuizAnswersAsStringList.add(answer2);
+  outputQuizAnswersAsStringList.add(answer3);
+  outputQuizAnswersAsStringList.add(answer4);
 
   return outputQuizAnswersAsStringList;
 }
@@ -64,43 +64,43 @@ String editQuizAnswer(
   // Add your function code here!
   String quizAnswer;
 
-  quizAnswer = answerList![questionNumber!];
+  quizAnswer = answerList[questionNumber];
   return quizAnswer;
 }
 
 String returnQuizAnswer(
-  QuizzesRecord recQuiz,
-  int answerNumber,
-  int questionNumber,
+  QuizzesRecord? recQuiz,
+  int? answerNumber,
+  int? questionNumber,
 ) {
   // Add your function code here!
-  late String answerString;
+  String answerString;
 
   if (questionNumber == 1) {
-    answerString = recQuiz.q1Answers?[answerNumber] ?? "blank";
+    answerString = recQuiz.q1Answers[answerNumber];
   }
 
   if (questionNumber == 2) {
-    answerString = recQuiz.q2Answers?[answerNumber] ?? "blank";
+    answerString = recQuiz.q2Answers[answerNumber];
   }
 
   return answerString;
 }
 
 List<String> returnQuizAnswerStringList(
-  QuizzesRecord recQuiz,
-  int questionNumber,
-  List<String> answersList,
+  QuizzesRecord? recQuiz,
+  int? questionNumber,
+  List<String>? answersList,
 ) {
   // Add your function code here!
 
   if (questionNumber == 1) {
-    int answerIndex = recQuiz.q1correctAnswerIndex!.toInt() - 1;
+    int answerIndex = recQuiz.q1correctAnswerIndex.toInt() - 1;
     answersList.insert(answerIndex, recQuiz.q1Correct);
   }
 
   if (questionNumber == 2) {
-    int answerIndex = recQuiz.q2correctAnswerIndex!.toInt() - 1;
+    int answerIndex = recQuiz.q2correctAnswerIndex.toInt() - 1;
     answersList.insert(answerIndex, recQuiz.q2Correct);
   }
 
