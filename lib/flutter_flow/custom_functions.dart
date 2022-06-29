@@ -68,42 +68,40 @@ String editQuizAnswer(
   return quizAnswer;
 }
 
-String? returnQuizAnswer(
+String returnQuizAnswer(
   QuizzesRecord recQuiz,
   int answerNumber,
   int questionNumber,
 ) {
   // Add your function code here!
-  String answerString;
+  late String answerString;
 
   if (questionNumber == 1) {
-    if (recQuiz.q1Answers[answerNumber] != null) {
-      answerString = recQuiz.q1Answers[answerNumber];
-    }
+    answerString = recQuiz.q1Answers![answerNumber];
   }
 
   if (questionNumber == 2) {
-    answerString = recQuiz.q2Answers[answerNumber];
+    answerString = recQuiz.q2Answers![answerNumber];
   }
 
   return answerString;
 }
 
 List<String> returnQuizAnswerStringList(
-  QuizzesRecord? recQuiz,
-  int? questionNumber,
-  List<String>? answersList,
+  QuizzesRecord recQuiz,
+  int questionNumber,
+  List<String> answersList,
 ) {
   // Add your function code here!
 
   if (questionNumber == 1) {
-    int answerIndex = recQuiz.q1correctAnswerIndex.toInt() - 1;
-    answersList.insert(answerIndex, recQuiz.q1Correct);
+    late int answerIndex = recQuiz.q1correctAnswerIndex!.toInt() - 1;
+    answersList.insert(answerIndex, recQuiz.q1Correct!);
   }
 
   if (questionNumber == 2) {
-    int answerIndex = recQuiz.q2correctAnswerIndex.toInt() - 1;
-    answersList.insert(answerIndex, recQuiz.q2Correct);
+    late int answerIndex = recQuiz.q2correctAnswerIndex!.toInt() - 1;
+    answersList.insert(answerIndex, recQuiz.q2Correct!);
   }
 
   return answersList;

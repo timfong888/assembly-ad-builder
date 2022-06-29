@@ -629,8 +629,8 @@ class _ListofAdsWidgetState extends State<ListofAdsWidget> {
                                             onPressed: () async {
                                               final adsUpdateData =
                                                   createAdsRecordData(
-                                                boolActive: listViewAdsRecord!
-                                                    .boolActive,
+                                                boolActive: !listViewAdsRecord!
+                                                    .boolActive!,
                                               );
                                               await listViewAdsRecord!.reference
                                                   .update(adsUpdateData);
